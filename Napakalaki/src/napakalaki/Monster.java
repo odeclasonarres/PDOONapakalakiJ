@@ -28,7 +28,7 @@ public class Monster {
 
     @Override
     public String toString() {
-        return "Monster{" + "name=" + this.name + ", combatLevel=" + Integer.toString(combatLevel)+ ", prize=" + prize.toString() + ", bc=" + bc.toString() + '}';
+        return "Monster{" + "name=" + this.name + ", combatLevel=" + Integer.toString(combatLevel)+ ", \nprize=" + prize.toString() + ", \n\nbc=" + bc.toString() + '}';
     }
 
     public int getCombatLevel() {
