@@ -20,6 +20,7 @@ public class Monster {
         this.combatLevel = combatLevel;
         this.prize = prize;
         this.bc = bc;
+        
     }
 
     public String getName() {
