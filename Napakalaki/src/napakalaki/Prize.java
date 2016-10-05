@@ -10,22 +10,25 @@ package napakalaki;
  * @author OdeclasOnarres
  */
 public class Prize {
-    private int treasure;
+    private int treasures;
     private int level;
     //hola
 
     public Prize(int treasure, int level) {
-        this.treasure = treasure;
+        this.treasures = treasure;
         this.level = level;
     }
 
     public int getTreasure() {
-        return this.treasure;
+        return this.treasures;
     }
 
     public int getLevel() {
         return this.level;
     }
     
-    
+    public String toString(){
+        return "(treasures = " + Integer.toString(treasures) + 
+                " levels = " + Integer.toString(level) + " )\n";
+    }
 }
