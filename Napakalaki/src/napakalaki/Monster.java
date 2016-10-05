@@ -21,6 +21,8 @@ public class Monster {
         this.prize = prize;
         this.bc = bc;
         
+        
+        
     }
 
     public String getName() {
