@@ -12,6 +12,7 @@ package napakalaki;
 public class Prize {
     private int treasure;
     private int level;
+    //hola
 
     public Prize(int treasure, int level) {
         this.treasure = treasure;
