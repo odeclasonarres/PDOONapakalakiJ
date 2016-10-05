@@ -19,17 +19,16 @@ public class Monster {
         this.name = name;
         this.combatLevel = combatLevel;
         this.prize = prize;
-        this.bc = bc;
-        
-        
-        
+        this.bc = bc; 
     }
 
     public String getName() {
         return name;
-        
-        
-        
+    }
+
+    @Override
+    public String toString() {
+        return "Monster{" + "name=" + this.name + ", combatLevel=" + Integer.toString(combatLevel)+ ", prize=" + prize.toString() + ", bc=" + bc.toString() + '}';
     }
 
     public int getCombatLevel() {
