@@ -77,9 +77,10 @@ public class BadConsequence {
             s += t + " ";
         }
         s+= " Specific Hidden Treasures = ";
+        
         for (TreasureKind t : specificHiddenTreasures){
             s += t + " ";
         }
-        return s + "\nDeath = " + Boolean.toString(death)+ " )\n";             
+        return s + "\nDeath = " + Boolean.toString(death)+ " )";             
     }
 }
