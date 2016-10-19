@@ -67,6 +67,22 @@ public class BadConsequence {
         return specificVisibleTreasures;
     }
     
+    public boolean isSpecificVisibleTreasure(TreasureKind t){
+        for(TreasureKind t2: specificVisibleTreasures){
+            if(t2.equals(t))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean isSpecificHiddenTreasure(TreasureKind t){
+        for(TreasureKind t2: specificHiddenTreasures){
+            if(t2.equals(t))
+                return true;
+        }
+        return false;
+    }
+    
     public String toString(){
         String s;
         s= text + "\nlevels = " + Integer.toString(levels) +

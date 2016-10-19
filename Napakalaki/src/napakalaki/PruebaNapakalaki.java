@@ -15,6 +15,44 @@ import java.util.Arrays;
 public class PruebaNapakalaki {
     static ArrayList<Monster> monstruos = new ArrayList();
     
+    public static ArrayList<Monster> monstruosNivelSuperiorA(int nivel){
+        ArrayList<Monster> resultado = new ArrayList();
+        for(Monster m : monstruos){
+            if(m.getCombatLevel()>nivel)
+                resultado.add(m);
+        }
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> monstruosBCSoloNiveles(){
+        ArrayList<Monster> resultado = new ArrayList();
+        for(Monster m : monstruos){
+            if(m.getBc().getLevels()>0 && m.getBc().getSpecificHiddenTreasures()==new ArrayList() && m.getBc().getSpecificVisibleTreasures()==new ArrayList() && m.getBc().getnHiddenTreasures()==0 && m.getBc().getnVisibleTreasures()==0){
+                resultado.add(m);
+            }
+        }
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> monstruosPrizeMasDeUnNivel(){
+        ArrayList<Monster> resultado = new ArrayList();
+        for(Monster m : monstruos){
+            if(m.getPrize().getLevel()>1)
+                resultado.add(m);
+        }
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(TreasureKind t){
+        ArrayList<Monster> resultado = new ArrayList();
+        for(Monster m : monstruos){
+            if(m.getBc().isSpecificHiddenTreasure(t)||m.getBc().isSpecificVisibleTreasure(t))
+                resultado.add(m);
+        }
+        return resultado;
+    }
+    
+    
     
     /**
      * @param args the command line arguments
@@ -101,10 +139,21 @@ public class PruebaNapakalaki {
         prize=new Prize(2, 1);
         monstruos.add(new Monster("Pollipolipo volante", 3, prize, badConsequence));
   
-        for (Monster m : monstruos) {
+        /*for (Monster m : monstruos) {
             System.out.println(m.toString());
+        }*/
+        
+        ArrayList<Monster> res = new ArrayList();
+        //res = monstruosNivelSuperiorA(10);
+        //res = monstruosBCSoloNiveles();
+        //res = monstruosConUnTesoroEspecifico(TreasureKind.ARMOR);
+        res = monstruosPrizeMasDeUnNivel();
+        for(Monster m : res){
+            System.out.println(m);
         }
-           
+        
+        
+        
         
     }
 }
