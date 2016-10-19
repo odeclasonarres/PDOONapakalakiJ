@@ -44,7 +44,7 @@ public class PruebaNapakalaki {
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(String t){
+    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(TreasureKind t){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
             if(m.getBc().isSpecificHiddenTreasure(t)||m.getBc().isSpecificVisibleTreasure(t))
@@ -179,7 +179,7 @@ public class PruebaNapakalaki {
             
             
             entrada = in.nextLine();
-            
+            res = new ArrayList();
             opcion = Integer.parseInt(entrada);
             switch(opcion){
                 case 1:
@@ -213,7 +213,35 @@ public class PruebaNapakalaki {
                 case 4:
                     System.out.println("\n\nIntroduzca el tesoro en MAYUSCULAS: "); //NO FUNCIONA
                     entrada = in.nextLine();
-                    res = monstruosConUnTesoroEspecifico(entrada);
+                    switch(entrada){
+                        case "ARMOR":
+                            res = monstruosConUnTesoroEspecifico(TreasureKind.ARMOR);
+                            break;
+                        
+                        case "ONEHAND":
+                            res = monstruosConUnTesoroEspecifico(TreasureKind.ONEHAND);
+                            break;
+                            
+                        case "BOTHHANDS":
+                            res = monstruosConUnTesoroEspecifico(TreasureKind.BOTHHANDS);
+                            break;
+                         
+                        case "HELMET":
+                            res = monstruosConUnTesoroEspecifico(TreasureKind.HELMET);
+                            break;
+                            
+                        case "SHOES":
+                            res = monstruosConUnTesoroEspecifico(TreasureKind.SHOES);
+                            break;
+                            
+                        default:
+                            System.out.println("\n\n El tesoro no existe o esta en minusculas\n\n");
+                            break;
+                            
+                    }
+                    for(Monster m : res){
+                        System.out.println(m);
+                    }
                     break;
                     
                 case 5:

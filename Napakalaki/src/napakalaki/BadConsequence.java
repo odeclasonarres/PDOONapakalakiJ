@@ -67,17 +67,17 @@ public class BadConsequence {
         return specificVisibleTreasures;
     }
     
-    public boolean isSpecificVisibleTreasure(String t){
+    public boolean isSpecificVisibleTreasure(TreasureKind t){
         for(TreasureKind t2: specificVisibleTreasures){
-            if(t2.toString()==t)
+            if(t2.equals(t))
                 return true;
         }
         return false;
     }
     
-    public boolean isSpecificHiddenTreasure(String t){
+    public boolean isSpecificHiddenTreasure(TreasureKind t){
         for(TreasureKind t2: specificHiddenTreasures){
-            if(t2.toString()==t)
+            if(t2.equals(t))
                 return true;
         }
         return false;
