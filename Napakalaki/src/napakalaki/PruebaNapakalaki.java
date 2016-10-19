@@ -7,6 +7,7 @@ package napakalaki;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
@@ -43,11 +44,28 @@ public class PruebaNapakalaki {
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(TreasureKind t){
+    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(String t){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
             if(m.getBc().isSpecificHiddenTreasure(t)||m.getBc().isSpecificVisibleTreasure(t))
                 resultado.add(m);
+        }
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> monstruosQueMatan(){
+        ArrayList<Monster> resultado = new ArrayList();
+        for(Monster m : monstruos){
+            if(m.getBc().isDeath()==true)
+                resultado.add(m);
+        }
+        return resultado;
+    }
+    
+    public static double monstruosNivelMedio(){
+        double resultado = 0.0;
+        for(Monster m : monstruos){
+            resultado= (resultado+m.getCombatLevel())/2;
         }
         return resultado;
     }
@@ -139,20 +157,88 @@ public class PruebaNapakalaki {
         prize=new Prize(2, 1);
         monstruos.add(new Monster("Pollipolipo volante", 3, prize, badConsequence));
   
-        /*for (Monster m : monstruos) {
-            System.out.println(m.toString());
-        }*/
-        
+      
         ArrayList<Monster> res = new ArrayList();
-        //res = monstruosNivelSuperiorA(10);
-        //res = monstruosBCSoloNiveles();
-        //res = monstruosConUnTesoroEspecifico(TreasureKind.ARMOR);
-        res = monstruosPrizeMasDeUnNivel();
-        for(Monster m : res){
-            System.out.println(m);
+        
+        //Menu
+        
+        int opcion=1;
+        Scanner in = new Scanner(System.in);
+        String entrada;
+        while(opcion!=7){
+            System.out.println("¿Que monstruos desea mostrar? \n"
+                + "1.- Nivel de combate superior a un numero \n"
+                + "2.- Mal rollo que implique solo perdida de niveles \n" 
+                + "3.- Su mal rollo indique una ganancia de niveles superior a 1\n"
+                + "4.- Su mal rollo suponga la perdida de un determinado tipo de tesoro\n"
+                + "5.- Ver monstruos que matan\n"
+                + "6.- Ver nivel medio de los monstruos\n"
+                + "7.- Salir del programa\n"
+                + "OPCION:  ");
+            
+            
+            
+            entrada = in.nextLine();
+            
+            opcion = Integer.parseInt(entrada);
+            switch(opcion){
+                case 1:
+                    System.out.println("\n\nIntroduzca el nivel: ");
+                    entrada = in.nextLine();
+                    opcion = Integer.parseInt(entrada);
+                    res = monstruosNivelSuperiorA(opcion);
+                    for(Monster m : res){
+                        System.out.println(m);
+                    }
+                    opcion=1;
+                    System.out.println("\n\n\n\n");
+                    break;
+                    
+                case 2:
+                    res = monstruosBCSoloNiveles();
+                    for(Monster m : res){
+                        System.out.println(m);
+                    }
+                    System.out.println("\n\n\n\n");
+                    break;
+                
+                case 3:
+                    res = monstruosPrizeMasDeUnNivel();
+                    for(Monster m : res){
+                        System.out.println(m);
+                    }
+                    System.out.println("\n\n\n\n");
+                    break;
+                
+                case 4:
+                    System.out.println("\n\nIntroduzca el tesoro en MAYUSCULAS: "); //NO FUNCIONA
+                    entrada = in.nextLine();
+                    res = monstruosConUnTesoroEspecifico(entrada);
+                    break;
+                    
+                case 5:
+                    res = monstruosQueMatan();
+                    for(Monster m : res){
+                        System.out.println(m);
+                    }
+                    System.out.println("\n\n\n\n");
+                    break;
+                
+                case 6:
+                    double r = monstruosNivelMedio();
+                    System.out.println("Nivel medio: "+ Double.toString(r) +"\n\n\n\n");
+                    break;
+                    
+                case 7:
+                    System.out.println("FIN");
+                    return;
+                    
+                default:
+                    System.out.println("\n\n\n\nOPCION ERRONEA\n\n\n\n");
+                    break;
+                            
+            }
         }
-        
-        
         
         
     }
