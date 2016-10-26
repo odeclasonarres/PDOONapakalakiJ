@@ -83,6 +83,14 @@ public class BadConsequence {
         return false;
     }
     
+    public boolean isSpecificVisibleTreasureEmpty(){
+        return specificVisibleTreasures.isEmpty();
+    }
+    
+    public boolean isSpecificHiddenTreasureEmpty(){
+        return specificHiddenTreasures.isEmpty();
+    }
+    
     public String toString(){
         String s;
         s= text + "\nlevels = " + Integer.toString(levels) +

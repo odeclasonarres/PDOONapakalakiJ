@@ -28,7 +28,7 @@ public class PruebaNapakalaki {
     private static ArrayList<Monster> monstruosBCSoloNiveles(){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getBCLevels()>0 && m.getBCSpecificHiddenTreasures()==new ArrayList() && m.getBCSpecificVisibleTreasures()==new ArrayList() && m.getBCNHiddenTreasures()==0 && m.getBCNVisibleTreasures()==0){
+            if(m.getBCLevels()>0 && m.isBCSpecificVisibleTreasureEmpty() && m.isBCSpecificHiddenTreasureEmpty() && m.getBCNHiddenTreasures()==0 && m.getBCNVisibleTreasures()==0){
                 resultado.add(m);
             }
         }
@@ -162,7 +162,7 @@ public class PruebaNapakalaki {
             System.out.println("¿Que monstruos desea mostrar? \n"
                 + "1.- Nivel de combate superior a un numero \n"
                 + "2.- Mal rollo que implique solo perdida de niveles \n" 
-                + "3.- Su mal rollo indique una ganancia de niveles superior a 1\n"
+                + "3.- Su buen rollo indique una ganancia de niveles superior a 1\n"
                 + "4.- Su mal rollo suponga la perdida de un determinado tipo de tesoro\n"
                 + "5.- Ver monstruos que matan\n"
                 + "6.- Ver nivel medio de los monstruos\n"

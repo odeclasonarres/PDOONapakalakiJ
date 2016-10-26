@@ -81,4 +81,12 @@ public class Monster {
         return bc.isDeath();
     }
     
+    public boolean isBCSpecificVisibleTreasureEmpty(){
+        return bc.isSpecificVisibleTreasureEmpty();
+    }
+    
+    public boolean isBCSpecificHiddenTreasureEmpty(){
+        return bc.isSpecificHiddenTreasureEmpty();
+    }
+        
 }
