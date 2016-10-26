@@ -5,6 +5,8 @@
  */
 package napakalaki;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author OdeclasOnarres
@@ -43,5 +45,40 @@ public class Monster {
         return bc;
     }
     
+    public int getBCLevels(){
+        return bc.getLevels();
+    }
+    
+    public ArrayList<TreasureKind> getBCSpecificHiddenTreasures(){
+        return bc.getSpecificHiddenTreasures();
+    }
+    
+    public ArrayList<TreasureKind> getBCSpecificVisibleTreasures(){
+        return bc.getSpecificVisibleTreasures();
+    }
+    
+    public int getBCNHiddenTreasures(){
+        return bc.getnHiddenTreasures();
+    }
+    
+    public int getBCNVisibleTreasures(){
+        return bc.getnVisibleTreasures();
+    }
+    
+    public int getPLevel(){
+        return prize.getLevel();
+    }
+    
+    public boolean isBCSpecificHiddenTreasure(TreasureKind t){
+        return bc.isSpecificHiddenTreasure(t);
+    }
+    
+    public boolean isBCSpecificVisibleTreasure(TreasureKind t){
+        return bc.isSpecificVisibleTreasure(t);
+    }
+    
+    public boolean isBCDeath(){
+        return bc.isDeath();
+    }
     
 }

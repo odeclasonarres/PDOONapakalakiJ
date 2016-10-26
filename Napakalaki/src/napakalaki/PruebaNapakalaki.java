@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class PruebaNapakalaki {
     static ArrayList<Monster> monstruos = new ArrayList();
     
-    public static ArrayList<Monster> monstruosNivelSuperiorA(int nivel){
+    private static ArrayList<Monster> monstruosNivelSuperiorA(int nivel){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
             if(m.getCombatLevel()>nivel)
@@ -25,44 +25,44 @@ public class PruebaNapakalaki {
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosBCSoloNiveles(){
+    private static ArrayList<Monster> monstruosBCSoloNiveles(){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getBc().getLevels()>0 && m.getBc().getSpecificHiddenTreasures()==new ArrayList() && m.getBc().getSpecificVisibleTreasures()==new ArrayList() && m.getBc().getnHiddenTreasures()==0 && m.getBc().getnVisibleTreasures()==0){
+            if(m.getBCLevels()>0 && m.getBCSpecificHiddenTreasures()==new ArrayList() && m.getBCSpecificVisibleTreasures()==new ArrayList() && m.getBCNHiddenTreasures()==0 && m.getBCNVisibleTreasures()==0){
                 resultado.add(m);
             }
         }
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosPrizeMasDeUnNivel(){
+    private static ArrayList<Monster> monstruosPrizeMasDeUnNivel(){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getPrize().getLevel()>1)
+            if(m.getPLevel()>1)
                 resultado.add(m);
         }
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosConUnTesoroEspecifico(TreasureKind t){
+    private static ArrayList<Monster> monstruosConUnTesoroEspecifico(TreasureKind t){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getBc().isSpecificHiddenTreasure(t)||m.getBc().isSpecificVisibleTreasure(t))
+            if(m.isBCSpecificHiddenTreasure(t)||m.isBCSpecificVisibleTreasure(t))
                 resultado.add(m);
         }
         return resultado;
     }
     
-    public static ArrayList<Monster> monstruosQueMatan(){
+    private static ArrayList<Monster> monstruosQueMatan(){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getBc().isDeath()==true)
+            if(m.isBCDeath()==true)
                 resultado.add(m);
         }
         return resultado;
     }
     
-    public static double monstruosNivelMedio(){
+    private static double monstruosNivelMedio(){
         double resultado = 0.0;
         for(Monster m : monstruos){
             resultado= (resultado+m.getCombatLevel())/2;
@@ -70,13 +70,7 @@ public class PruebaNapakalaki {
         return resultado;
     }
     
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
+    private static void inicializarMonstruos(){
         BadConsequence badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles", 5, 3, 0);
         Prize prize = new Prize(3,2);
         monstruos.add(new Monster("El rey de rosado", 11,prize, badConsequence));
@@ -87,11 +81,9 @@ public class PruebaNapakalaki {
         prize= new Prize(2, 1);
         monstruos.add(new Monster("3 Byakhees de la biodanza", 8, prize, badConsequence) );
 
-        
         badConsequence = new BadConsequence("Embobados con el lindo primigenio te descartas de tu casco visible", 0, new ArrayList(Arrays.asList(TreasureKind.HELMET)), new ArrayList(Arrays.asList()));
         prize = new Prize(1,1);
         monstruos.add(new Monster("Tenochtitlan",2,prize, badConsequence));
-        
         
         badConsequence = new BadConsequence("Te atrapan para llevarte de fiesta y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta", 0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
         prize = new Prize(4,1);
@@ -156,8 +148,9 @@ public class PruebaNapakalaki {
         badConsequence=new BadConsequence("Da mucho asquito.Pierdes 3 niveles", 3, 0, 0);
         prize=new Prize(2, 1);
         monstruos.add(new Monster("Pollipolipo volante", 3, prize, badConsequence));
-  
-      
+    }
+    
+    private static void menu(){
         ArrayList<Monster> res = new ArrayList();
         
         //Menu
@@ -267,7 +260,16 @@ public class PruebaNapakalaki {
                             
             }
         }
-        
-        
+    }
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        inicializarMonstruos();
+        menu();
+      
     }
 }
