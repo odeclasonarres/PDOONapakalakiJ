@@ -38,7 +38,7 @@ public class PruebaNapakalaki {
     private static ArrayList<Monster> monstruosPrizeMasDeUnNivel(){
         ArrayList<Monster> resultado = new ArrayList();
         for(Monster m : monstruos){
-            if(m.getPLevel()>1)
+            if(m.getLevelsGained()>1)
                 resultado.add(m);
         }
         return resultado;

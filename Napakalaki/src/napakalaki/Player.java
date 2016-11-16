@@ -31,19 +31,23 @@ public class Player {
     }
     
     private void bringToLife(){
-        
+        dead=false;
     }
 
     private int getCombatLevel() {
-        return 0;
+        int l = getLevels();
+        for(Treasure v: visibleTreasures){
+            l= l+ v.getBonus();
+        }
+        return l;
     }
 
     private void incrementLevels(int l){
-        
+        level+=l;
     }
     
     private void decrementLevels(int l){
-        
+        level-=l;
     }
     
     private void setPendingBadConsequence(BadConsequence b){
@@ -63,11 +67,17 @@ public class Player {
     }
     
     private int howManyVisibleTreasures(TreasureKind tKind){
-        return 0;
+        int cont=0;
+        for(Treasure t: visibleTreasures){
+            if(t.getType()==tKind)
+                cont++;
+        }
+        return cont;
     }
     
     private void dieIfNoTreasures(){
-        
+        if(visibleTreasures.isEmpty()&&hiddenTreasures.isEmpty())
+            dead=true;
     }
     
     public boolean isDead() {
@@ -99,6 +109,10 @@ public class Player {
     }
     
     public boolean validState(){
+        boolean valid=false;
+        if(pendingBadConsequence.isEmpty())
+            if(hiddenTreasures.size()>4)
+                return true;
         return false;
     }
     
@@ -123,15 +137,17 @@ public class Player {
     }
     
     public boolean canISteal(){
-        return false;
+        return canISteal;
     }
     
     private boolean canYouGiveMeATreasure(){
+        if(!visibleTreasures.isEmpty()||!hiddenTreasures.isEmpty())
+            return true;
         return false;
     }
     
     private void haveStolen(){
-        
+        canISteal=false;
     }
     
     public void discardAllTreasures(){

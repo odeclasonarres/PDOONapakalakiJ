@@ -41,7 +41,7 @@ public class Monster {
         return prize;
     }
 
-    public BadConsequence getBc() {
+    public BadConsequence getBadConsequence() {
         return bc;
     }
     
@@ -65,7 +65,7 @@ public class Monster {
         return bc.getnVisibleTreasures();
     }
     
-    public int getPLevel(){
+    public int getLevelsGained(){
         return prize.getLevel();
     }
     
@@ -88,5 +88,8 @@ public class Monster {
     public boolean isBCSpecificHiddenTreasureEmpty(){
         return bc.isSpecificHiddenTreasureEmpty();
     }
-        
+    
+    public int getTreasuresGained(){
+        return prize.getTreasure();
+    }
 }

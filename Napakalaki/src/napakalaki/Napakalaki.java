@@ -15,8 +15,8 @@ public class Napakalaki {
      private static Napakalaki instancia = new Napakalaki();
      private CardDealer cd = CardDealer.getInstance();
      private Monster currentMonster;
-     //private Player currentPlayer;
-     //private ArrayList<Player> players;
+     private Player currentPlayer;
+     private ArrayList<Player> players;
      
      private Napakalaki(){
          
@@ -31,11 +31,11 @@ public class Napakalaki {
          
      }
      
-     /*
-     private Player nextPlayer(){
      
+     private Player nextPlayer(){
+         return null;
      }
-     */
+     
      
      private boolean nextTurnAllowed(){
          return true;
@@ -65,13 +65,13 @@ public class Napakalaki {
          
      }
      
-     /*
-     public Player getCurrentPlayer(){
      
+     public Player getCurrentPlayer(){
+         return currentPlayer;
      }
-     */
+     
      public Monster getCurrentMonster(){
-         return null;
+         return currentMonster;
      }
      
      public boolean nextTurn(){

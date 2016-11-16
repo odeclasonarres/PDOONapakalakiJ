@@ -91,6 +91,16 @@ public class BadConsequence {
         return specificHiddenTreasures.isEmpty();
     }
     
+    public boolean isEmpty(){
+        if(nVisibleTreasures==0&&nHiddenTreasures==0&&isSpecificVisibleTreasureEmpty()&&isSpecificHiddenTreasureEmpty())
+            return true;
+        return false;
+    }
+    
+    public BadConsequence adjustToFitTreasureLists(ArrayList<TreasureKind> v,ArrayList<TreasureKind>  h){
+        return this;
+    }
+    
     public String toString(){
         String s;
         s= text + "\nlevels = " + Integer.toString(levels) +
