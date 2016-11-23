@@ -65,7 +65,28 @@ public class Player {
     }
     
     private boolean canMakeTreasureVisible(Treasure t){
-        return false;
+        if(t.getType()==TreasureKind.BOTHHANDS){
+            for(Treasure tv: visibleTreasures){
+                if(tv.getType()==TreasureKind.BOTHHANDS||tv.getType()==TreasureKind.ONEHAND)
+                    return false;
+            }
+        }else if(t.getType()==TreasureKind.ONEHAND){
+            int cont=0;
+            for(Treasure tv: visibleTreasures){
+                if(tv.getType()==TreasureKind.BOTHHANDS)
+                    return false;
+                if(tv.getType()==TreasureKind.ONEHAND)
+                    cont++;
+                if(cont==2)
+                    return false;
+            }
+        }else{
+            for(Treasure tv: visibleTreasures){
+                if(tv.getType()==t.getType())
+                    return false;
+            }
+        }
+        return true;
     }
     
     private int howManyVisibleTreasures(TreasureKind tKind){
@@ -143,9 +164,10 @@ public class Player {
     }
     
     private boolean canYouGiveMeATreasure(){
+        boolean retorno = false;
         if(!visibleTreasures.isEmpty()||!hiddenTreasures.isEmpty())
-            return true;
-        return false;
+            retorno = true;
+        return retorno;
     }
     
     private void haveStolen(){

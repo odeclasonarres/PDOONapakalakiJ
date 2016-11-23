@@ -6,6 +6,7 @@
 package napakalaki;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Napakalaki {
      private Player currentPlayer;
      private ArrayList<Player> players;
      
+     
      private Napakalaki(){
          
      }
@@ -28,21 +30,47 @@ public class Napakalaki {
      }
      
      private void initPlayers(ArrayList<String> names){
-         
+         for(String s: names){
+             players.add(new Player(s));
+         }
      }
      
      
      private Player nextPlayer(){
-         return null;
+         int x;
+         if(currentPlayer==null){
+            Random rnd = new Random();
+            x = rnd.nextInt(players.size());
+         }else{
+            x = players.indexOf(currentPlayer);
+            x = (x+1)%players.size();
+         }
+        return players.get(x);
      }
      
      
      private boolean nextTurnAllowed(){
-         return true;
+         boolean retorno;
+         if(currentPlayer==null)
+            retorno = true;
+         else
+            retorno = currentPlayer.validState();
+         return retorno;
      }
      
      private void setEnemies(){
-         
+        Random rnd = new Random();
+        int x;
+        for(Player p: players){
+            x = rnd.nextInt(players.size());
+            if(x==players.indexOf(p)){
+                if(players.indexOf(p)==players.size()-1)
+                    x=0;
+                else
+                    x+=1;
+            }
+            p.setEnemy(players.get(x));
+        }
      }
      
      public CombatResult developCombat(){
@@ -79,6 +107,9 @@ public class Napakalaki {
      }
      
      public boolean endOfGame(CombatResult result){
-         return false;
+         if(result==CombatResult.WINGAME)
+            return true;
+         else
+             return false;
      }
 }
