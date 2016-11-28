@@ -116,7 +116,29 @@ public class Player {
     }
     
     public CombatResult combat(Monster m){
-        return null;
+        CombatResult cr;
+        int myLevel=this.getCombatLevel();
+        int monsterLevel=m.getCombatLevel();
+        if(canISteal){
+            Dice dice=Dice.getInstance();
+            int number=dice.nextNumber();
+            if(number<3){
+                int enemyLevel=this.enemy.getCombatLevel();
+                monsterLevel+=enemyLevel;
+            }
+        }
+        if(myLevel>monsterLevel){
+                applyPrize(m);
+                if(level>=MAXLEVEL){
+                    cr=CombatResult.WINGAME;
+                }else{
+                    cr=CombatResult.WIN;
+                }    
+            }else{
+                applyBadConsequence(m);
+                cr=CombatResult.LOSE;
+            }
+        return cr;
     }
     
     public void makeTreasureVisible(Treasure t){
@@ -124,11 +146,19 @@ public class Player {
     }
     
     public void discardVisibleTreasure(Treasure t){
-        
+        this.visibleTreasures.remove(t);
+        if((this.pendingBadConsequence==null)&&(!this.pendingBadConsequence.isEmpty())){
+            this.pendingBadConsequence.substractVisibleTreasure(t);
+        }
+        dieIfNoTreasures();          
     }
     
     public void discardHiddenTreasure(Treasure t){
-        
+        this.hiddenTreasures.remove(t);
+        if((this.pendingBadConsequence==null)&&(!this.pendingBadConsequence.isEmpty())){
+            this.pendingBadConsequence.substractVisibleTreasure(t);
+        }
+        dieIfNoTreasures();   
     }
     
     public boolean validState(){

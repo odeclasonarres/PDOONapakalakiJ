@@ -58,7 +58,7 @@ public class Napakalaki {
          return retorno;
      }
      
-     private void setEnemies(){
+     private void setEnemies(){ //REVISAR ---> hacer con %
         Random rnd = new Random();
         int x;
         for(Player p: players){
@@ -74,25 +74,43 @@ public class Napakalaki {
      }
      
      public CombatResult developCombat(){
-         return null;
+         CombatResult retorno=this.currentPlayer.combat(currentMonster);
+         cd.giveMonsterBack(currentMonster);
+         return retorno;    
      }
      
      public void discardVisibleTreasures(ArrayList<Treasure> treasures){
-         
+         for(Treasure t:treasures){
+             this.currentPlayer.discardVisibleTreasure(t);
+             this.cd.giveTreasureBack(t);
+         }
      }
      
      public void discardHiddenTreasures(ArrayList<Treasure> treasures){
-         
+         for(Treasure t:treasures){
+             this.currentPlayer.discardHiddenTreasure(t);
+             this.cd.giveTreasureBack(t);
+         }
      }
 
      public void makeTreasureVisible(ArrayList<Treasure> treasures){
-         
+         for(Treasure t: treasures){
+             this.currentPlayer.makeTreasureVisible(t);
+             boolean canI=true;//canM
+             if(canI){
+                 this.currentPlayer.
+             }
+             
+         }
      }
      
-     public void initGame(){
+     public void initGame(ArrayList<String> names){
+         initPlayers(names);
+         setEnemies();
+         nextTurn();
+         cd.initCards();
          
      }
-     
      
      public Player getCurrentPlayer(){
          return currentPlayer;
@@ -103,7 +121,17 @@ public class Napakalaki {
      }
      
      public boolean nextTurn(){
-         return false;
+        boolean stateOk;
+        stateOk=nextTurnAllowed();
+        if(stateOk){
+            this.currentMonster=cd.nextMonster();
+            this.currentPlayer=nextPlayer();
+            boolean dead=currentPlayer.isDead();
+            if(dead){
+                currentPlayer.initTreasures();
+            }
+        }
+        return stateOk;
      }
      
      public boolean endOfGame(CombatResult result){

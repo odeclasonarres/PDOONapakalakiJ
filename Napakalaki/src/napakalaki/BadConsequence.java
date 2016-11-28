@@ -98,6 +98,20 @@ public class BadConsequence {
     }
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<TreasureKind> v,ArrayList<TreasureKind>  h){
+        /*
+        Numericos
+            nv=min(pendin, equipado)
+            nh=min(pendin, equipado)
+            bc=newNumeric
+        
+        
+        Especificos
+            Metodo nuevo: devuelve lo común entre los dos arrays
+            sv=metodo(array pendin, array equipado)
+            sh=metodo(array pendin, array equipado)
+            bc=newSpecific
+        */
+        
         return this;
     }
     
@@ -116,5 +130,28 @@ public class BadConsequence {
             s += t + " ";
         }
         return s + "\nDeath = " + Boolean.toString(death)+ " )";             
+    }
+
+    public void substractVisibleTreasure(Treasure t) {
+        if(this.nVisibleTreasures>0){
+            this.nVisibleTreasures--;
+        }
+        for(TreasureKind ty:this.specificVisibleTreasures){
+            if(t.getType()==ty){
+                this.specificVisibleTreasures.remove(t.getType());
+            }
+        }
+        
+    }
+    
+    public void substractHiddenTreasure(Treasure t) {
+        if(this.nHiddenTreasures>0){
+            this.nHiddenTreasures--;
+        }
+        for(TreasureKind ty:this.specificHiddenTreasures){
+            if(t.getType()==ty){
+                this.specificHiddenTreasures.remove(t.getType());
+            }
+        }
     }
 }
