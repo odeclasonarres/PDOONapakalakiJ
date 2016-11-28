@@ -97,22 +97,28 @@ public class BadConsequence {
         return false;
     }
     
-    public BadConsequence adjustToFitTreasureLists(ArrayList<TreasureKind> v,ArrayList<TreasureKind>  h){
-        /*
-        Numericos
-            nv=min(pendin, equipado)
-            nh=min(pendin, equipado)
-            bc=newNumeric
-        
-        
-        Especificos
-            Metodo nuevo: devuelve lo común entre los dos arrays
-            sv=metodo(array pendin, array equipado)
-            sh=metodo(array pendin, array equipado)
-            bc=newSpecific
-        */
-        
-        return this;
+    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure>  h){
+        BadConsequence retorno;
+        if(this.isSpecificVisibleTreasureEmpty()&&this.isSpecificHiddenTreasureEmpty()){
+            int vis=Integer.min(v.size(), this.nVisibleTreasures);
+            int hid=Integer.min(h.size(), this.nHiddenTreasures);
+            retorno= new BadConsequence(this.text,this.levels,vis,hid);
+        }else{
+            ArrayList<TreasureKind> vk=new ArrayList<TreasureKind>();
+            ArrayList<TreasureKind> hk=new ArrayList<TreasureKind>();
+            for(Treasure t: v){
+                vk.add(t.getType());
+            }
+            for(Treasure t: h){
+                hk.add(t.getType());
+            }
+            ArrayList<TreasureKind> vis=new ArrayList<>(this.specificVisibleTreasures);
+            ArrayList<TreasureKind> hid=new ArrayList<>(this.specificHiddenTreasures);
+            vis.retainAll(vk);
+            hid.retainAll(hk);
+            retorno=new BadConsequence(text, levels, vis, hid);
+        }        
+        return retorno;
     }
     
     public String toString(){
