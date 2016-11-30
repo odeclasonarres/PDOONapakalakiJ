@@ -5,7 +5,9 @@
  */
 package napakalaki;
 
+import static java.lang.Integer.min;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -97,27 +99,39 @@ public class BadConsequence {
         return false;
     }
     
+    private ArrayList<TreasureKind> adjustSpecific(ArrayList<TreasureKind> tb, ArrayList<TreasureKind> tj){
+        ArrayList<TreasureKind> retorno = new ArrayList();
+        int x=0;
+        for(TreasureKind tipo: tb){ 
+            x=tj.indexOf(tipo);
+            if(x>=0){
+                retorno.add(tj.remove(x));  
+            }
+        }
+        return retorno;
+    }
+    
+    private ArrayList<TreasureKind> treasureToTreasureKind(ArrayList<Treasure> t){
+        ArrayList<TreasureKind> retorno = new ArrayList();
+        for(Treasure tesoro: t){
+            retorno.add(tesoro.getType());
+        }
+        return retorno;
+    }
+    
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure>  h){
         BadConsequence retorno;
-        if(this.isSpecificVisibleTreasureEmpty()&&this.isSpecificHiddenTreasureEmpty()){
-            int vis=Integer.min(v.size(), this.nVisibleTreasures);
-            int hid=Integer.min(h.size(), this.nHiddenTreasures);
-            retorno= new BadConsequence(this.text,this.levels,vis,hid);
+        if(nVisibleTreasures!=0 || nHiddenTreasures!=0){
+            int nV,nH;
+            nV=min(nVisibleTreasures,v.size());
+            nH=min(nHiddenTreasures,h.size());
+            retorno = new BadConsequence(text, levels, nV, nH);
         }else{
-            ArrayList<TreasureKind> vk=new ArrayList<TreasureKind>();
-            ArrayList<TreasureKind> hk=new ArrayList<TreasureKind>();
-            for(Treasure t: v){
-                vk.add(t.getType());
-            }
-            for(Treasure t: h){
-                hk.add(t.getType());
-            }
-            ArrayList<TreasureKind> vis=new ArrayList<>(this.specificVisibleTreasures);
-            ArrayList<TreasureKind> hid=new ArrayList<>(this.specificHiddenTreasures);
-            vis.retainAll(vk);
-            hid.retainAll(hk);
-            retorno=new BadConsequence(text, levels, vis, hid);
-        }        
+            ArrayList<TreasureKind> sV,sH;
+            sV = adjustSpecific(specificVisibleTreasures, treasureToTreasureKind(v));
+            sH = adjustSpecific(specificHiddenTreasures, treasureToTreasureKind(h));
+            retorno = new BadConsequence(text, levels, sV, sH);
+        }   
         return retorno;
     }
     
