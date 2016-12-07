@@ -18,7 +18,7 @@ public class Player {
     private int level;
     private boolean dead=true;
     private boolean canISteal=true;
-    private Player enemy;
+    protected Player enemy;
     private ArrayList<Treasure> hiddenTreasures = new ArrayList();
     private ArrayList<Treasure> visibleTreasures = new ArrayList();
     private BadConsequence pendingBadConsequence = null;
@@ -27,7 +27,22 @@ public class Player {
         this.name=name;
         this.level = 1;
     }
+    
+    public Player(Player p){
+        this.name=p.getName();
+        this.level=p.getLevels();
+        this.dead=p.isDead();
+        this.canISteal=p.canISteal();
+        this.enemy=p.enemy;
+        this.hiddenTreasures=p.getHiddenTreasures();
+        this.visibleTreasures=p.getVisibleTreasures();
+        this.pendingBadConsequence=p.pendingBadConsequence;
+    }
 
+    protected int  getOponentLevel(Monster m){return 0;}
+    protected boolean shouldConvert(){return false;}
+
+    
     public String getName() {
         return name;
     }
@@ -37,7 +52,7 @@ public class Player {
         pendingBadConsequence=null;  //no seguro
     }
 
-    private int getCombatLevel() {
+    protected int getCombatLevel() {
         int l = getLevels();
         for(Treasure v: visibleTreasures){
             l= l+ v.getBonus();

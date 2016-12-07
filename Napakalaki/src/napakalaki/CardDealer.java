@@ -19,6 +19,7 @@ public class CardDealer {
     private ArrayList<Monster> unusedMonsters = new ArrayList();
     private ArrayList<Monster> usedMonsters = new ArrayList();
     private ArrayList<Treasure> unusedTreasures = new ArrayList();
+    private ArrayList<Cultist> unusedCultist = new ArrayList();
     private ArrayList<Treasure> usedTreasures = new ArrayList();
     
     
@@ -144,6 +145,8 @@ public class CardDealer {
         unusedMonsters.add(new Monster("Pollipolipo volante", 3, prize, badConsequence));
     }
     
+    private void initCultistCardDeck(){}
+    
     private void shuffleTreasures(){
         final int NUM_TESOROS=unusedTreasures.size();        
         Random r = new Random();
@@ -177,6 +180,22 @@ public class CardDealer {
             
         }
     }
+    private void shuffleCultist(){
+        final int NUM_CULTIST=unusedCultist.size();        
+        Random r = new Random();
+        int segunda;
+        Cultist temp;
+
+        for(int primera=0;primera<unusedCultist.size();primera++){
+            
+            segunda=r.nextInt(NUM_CULTIST);
+            temp=unusedCultist.get(primera);
+            unusedCultist.set(primera, unusedCultist.get(segunda));
+            unusedCultist.set(segunda, temp);
+            
+            
+        }
+    }
     
     public Treasure nextTreasure(){
         Treasure retorno;
@@ -202,6 +221,10 @@ public class CardDealer {
             retorno=unusedMonsters.remove(0);
         }
         return retorno;
+    }
+    
+    public Cultist nextCultist(){
+        return unusedCultist.remove(0);
     }
     
     public void giveTreasureBack(Treasure t){

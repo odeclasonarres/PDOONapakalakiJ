@@ -8,9 +8,9 @@ package napakalaki;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author Charlie
+/** 
+ *  JOSÉ CARLOS BAENA ARIZA 
+ *  JUAN MANUEL SALCEDO SERRANO
  */
 public class Napakalaki {
      private static Napakalaki instancia = new Napakalaki();
