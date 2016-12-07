@@ -25,6 +25,7 @@ public class Player {
     
     public Player(String name){
         this.name=name;
+        this.level = 1;
     }
 
     public String getName() {
