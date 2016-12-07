@@ -16,10 +16,10 @@ import java.util.Random;
 public class CardDealer {
 
     private static final CardDealer instance = new CardDealer();
-    private ArrayList<Monster> unusedMonsters;
-    private ArrayList<Monster> usedMonsters;
-    private ArrayList<Treasure> unusedTreasures;
-    private ArrayList<Treasure> usedTreasures;
+    private ArrayList<Monster> unusedMonsters = new ArrayList();
+    private ArrayList<Monster> usedMonsters = new ArrayList();
+    private ArrayList<Treasure> unusedTreasures = new ArrayList();
+    private ArrayList<Treasure> usedTreasures = new ArrayList();
     
     
     private CardDealer(){
@@ -183,9 +183,9 @@ public class CardDealer {
         if(unusedTreasures.isEmpty()){
             unusedTreasures=usedTreasures;
             shuffleTreasures();
-            retorno=unusedTreasures.get(0);
+            retorno=unusedTreasures.remove(0);
         }else{
-            retorno=unusedTreasures.get(0);
+            retorno=unusedTreasures.remove(0);
         }
         return retorno;
     }
@@ -195,9 +195,9 @@ public class CardDealer {
         if(unusedMonsters.isEmpty()){
             unusedMonsters=usedMonsters;
             shuffleMonster();
-            retorno=unusedMonsters.get(0);
+            retorno=unusedMonsters.remove(0);
         }else{
-            retorno=unusedMonsters.get(0);
+            retorno=unusedMonsters.remove(0);
         }
         return retorno;
     }
@@ -213,5 +213,7 @@ public class CardDealer {
     public void initCards(){
         initTreasureCardDeck();
         initMonsterCardDeck();
+        shuffleTreasures();
+        shuffleMonster();
     }
 }

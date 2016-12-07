@@ -32,5 +32,8 @@ public class Treasure {
         return type;
     }
     
-    
+    @Override
+    public String toString(){
+        return name + " " + Integer.toString(bonus) + " " + type;
+    }
 }

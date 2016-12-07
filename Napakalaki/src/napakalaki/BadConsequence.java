@@ -21,6 +21,7 @@ public class BadConsequence {
     private boolean death;
     private ArrayList<TreasureKind> specificHiddenTreasures=new ArrayList();
     private ArrayList<TreasureKind> specificVisibleTreasures=new ArrayList();
+    private static final int MAXTREASURES = 4;
 
     public BadConsequence(String text, int levels, int nVisibleTreasures, int nHiddenTreasures) {
         this.text = text;
@@ -32,6 +33,9 @@ public class BadConsequence {
     public BadConsequence(String text, boolean death) {
         this.text = text;
         this.death = death;
+        levels = Player.MAXLEVEL;
+        nVisibleTreasures = MAXTREASURES;
+        nHiddenTreasures = MAXTREASURES;
     }
 
     public BadConsequence(String text, int levels, ArrayList<TreasureKind> specificVisibleTreasures, ArrayList<TreasureKind> specificHiddenTreasures) {
@@ -156,9 +160,11 @@ public class BadConsequence {
         if(this.nVisibleTreasures>0){
             this.nVisibleTreasures--;
         }
-        for(TreasureKind ty:this.specificVisibleTreasures){
-            if(t.getType()==ty){
-                this.specificVisibleTreasures.remove(t.getType());
+        if(!specificVisibleTreasures.isEmpty() && specificVisibleTreasures.contains(t)){
+            for(TreasureKind ty: specificVisibleTreasures){
+                if(t.getType()==ty){
+                    this.specificVisibleTreasures.remove(t.getType());
+                }
             }
         }
         
@@ -168,9 +174,11 @@ public class BadConsequence {
         if(this.nHiddenTreasures>0){
             this.nHiddenTreasures--;
         }
-        for(TreasureKind ty:this.specificHiddenTreasures){
-            if(t.getType()==ty){
-                this.specificHiddenTreasures.remove(t.getType());
+        if(!specificHiddenTreasures.isEmpty() && specificHiddenTreasures.contains(t)){
+            for(TreasureKind ty: specificHiddenTreasures){
+                if(t.getType()==ty){
+                    this.specificHiddenTreasures.remove(t.getType());
+                }
             }
         }
     }

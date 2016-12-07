@@ -6,6 +6,7 @@
 package napakalaki;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -18,9 +19,9 @@ public class Player {
     private boolean dead=true;
     private boolean canISteal=true;
     private Player enemy;
-    private ArrayList<Treasure> hiddenTreasures;
-    private ArrayList<Treasure> visibleTreasures;
-    private BadConsequence pendingBadConsequence;
+    private ArrayList<Treasure> hiddenTreasures = new ArrayList();
+    private ArrayList<Treasure> visibleTreasures = new ArrayList();
+    private BadConsequence pendingBadConsequence = null;
     
     public Player(String name){
         this.name=name;
@@ -32,6 +33,7 @@ public class Player {
     
     private void bringToLife(){
         dead=false;
+        pendingBadConsequence=null;  //no seguro
     }
 
     private int getCombatLevel() {
@@ -165,8 +167,9 @@ public class Player {
     }
     
     public void discardVisibleTreasure(Treasure t){
-        this.visibleTreasures.remove(t);
-        if((this.pendingBadConsequence==null)&&(!this.pendingBadConsequence.isEmpty())){
+        if(!visibleTreasures.isEmpty())
+            this.visibleTreasures.remove(t);
+        if((this.pendingBadConsequence!=null)&&(!this.pendingBadConsequence.isEmpty())){
             this.pendingBadConsequence.substractVisibleTreasure(t);
         }
         dieIfNoTreasures();
@@ -175,9 +178,10 @@ public class Player {
     }
     
     public void discardHiddenTreasure(Treasure t){
-        this.hiddenTreasures.remove(t);
-        if((this.pendingBadConsequence==null)&&(!this.pendingBadConsequence.isEmpty())){
-            this.pendingBadConsequence.substractVisibleTreasure(t);
+        if(!hiddenTreasures.isEmpty())
+            this.hiddenTreasures.remove(t);
+        if((this.pendingBadConsequence!=null)&&(!this.pendingBadConsequence.isEmpty())){
+            this.pendingBadConsequence.substractHiddenTreasure(t);
         }
         dieIfNoTreasures();
         CardDealer dealer = CardDealer.getInstance();
@@ -185,11 +189,11 @@ public class Player {
     }
     
     public boolean validState(){
-        boolean valid=false;
-        if(pendingBadConsequence.isEmpty())
-            if(hiddenTreasures.size()>4)
-                return true;
-        return false;
+        //boolean valid=false;
+        /*if( pendingBadConsequence == null || pendingBadConsequence.isEmpty() )
+            if(hiddenTreasures.size()<=4)
+                return true;*/
+        return this.pendingBadConsequence == null || (this.pendingBadConsequence.isEmpty() && this.hiddenTreasures.size() <= 4);
     }
     
     public void initTreasures(){
@@ -232,7 +236,9 @@ public class Player {
     }
     
     private Treasure giveMeATreasure(){
-        return null;
+        Random rnd = new Random();
+        int x = rnd.nextInt(hiddenTreasures.size());
+        return hiddenTreasures.remove(x);
     }
     
     public boolean canISteal(){
@@ -251,12 +257,16 @@ public class Player {
     }
     
     public void discardAllTreasures(){
-        for(Treasure t: visibleTreasures){
-            discardVisibleTreasure(t);
+        while(!visibleTreasures.isEmpty()){
+            discardVisibleTreasure(visibleTreasures.get(0));
         }
-        
-        for(Treasure t: hiddenTreasures){
-            discardHiddenTreasure(t);
+        while(!hiddenTreasures.isEmpty()){
+            discardHiddenTreasure(hiddenTreasures.get(0));
         }
+    }
+    
+    @Override
+    public String toString(){
+        return this.name + " Level: " + Integer.toString(level);
     }
 }

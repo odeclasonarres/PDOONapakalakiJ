@@ -17,7 +17,7 @@ public class Napakalaki {
      private CardDealer cd = CardDealer.getInstance();
      private Monster currentMonster;
      private Player currentPlayer;
-     private ArrayList<Player> players;
+     private ArrayList<Player> players = new ArrayList();
      
      
      private Napakalaki(){
