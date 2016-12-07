@@ -183,6 +183,7 @@ public class CardDealer {
         if(unusedTreasures.isEmpty()){
             unusedTreasures=usedTreasures;
             shuffleTreasures();
+            usedTreasures.clear();
             retorno=unusedTreasures.remove(0);
         }else{
             retorno=unusedTreasures.remove(0);
@@ -195,6 +196,7 @@ public class CardDealer {
         if(unusedMonsters.isEmpty()){
             unusedMonsters=usedMonsters;
             shuffleMonster();
+            usedMonsters.clear();
             retorno=unusedMonsters.remove(0);
         }else{
             retorno=unusedMonsters.remove(0);
