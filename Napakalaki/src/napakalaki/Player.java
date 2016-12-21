@@ -66,8 +66,9 @@ public class Player {
     }
     
     private void decrementLevels(int l){
-        if(level>0)
-            level-=l;
+        level-=l;
+        if(level<1)
+            level=1;
     }
     
     private void setPendingBadConsequence(BadConsequence b){
@@ -183,8 +184,7 @@ public class Player {
     }
     
     public void discardVisibleTreasure(Treasure t){
-        if(!visibleTreasures.isEmpty())
-            this.visibleTreasures.remove(t);
+        this.visibleTreasures.remove(t);
         if((this.pendingBadConsequence!=null)&&(!this.pendingBadConsequence.isEmpty())){
             this.pendingBadConsequence.substractVisibleTreasure(t);
         }
@@ -194,8 +194,7 @@ public class Player {
     }
     
     public void discardHiddenTreasure(Treasure t){
-        if(!hiddenTreasures.isEmpty())
-            this.hiddenTreasures.remove(t);
+        this.hiddenTreasures.remove(t);
         if((this.pendingBadConsequence!=null)&&(!this.pendingBadConsequence.isEmpty())){
             this.pendingBadConsequence.substractHiddenTreasure(t);
         }
