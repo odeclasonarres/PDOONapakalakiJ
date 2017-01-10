@@ -39,8 +39,18 @@ public class Player {
         this.pendingBadConsequence=p.pendingBadConsequence;
     }
 
-    protected int  getOponentLevel(Monster m){return 0;}
-    protected boolean shouldConvert(){return false;}
+    protected int  getOponentLevel(Monster m){
+        return m.getCombatLevel();
+    }
+    
+    protected boolean shouldConvert(){
+        Dice dice=Dice.getInstance();
+        int number=dice.nextNumber();
+        boolean retorno=false;
+        if(number==6)
+            retorno=true;
+        return retorno;
+    }
 
     
     public String getName() {
@@ -151,7 +161,7 @@ public class Player {
     public CombatResult combat(Monster m){
         CombatResult cr;
         int myLevel=this.getCombatLevel();
-        int monsterLevel=m.getCombatLevel();
+        int monsterLevel=getOponentLevel(m);
         if(!canISteal){
             Dice dice=Dice.getInstance();
             int number=dice.nextNumber();
@@ -161,16 +171,20 @@ public class Player {
             }
         }
         if(myLevel>monsterLevel){
-                applyPrize(m);
-                if(level>=MAXLEVEL){
-                    cr=CombatResult.WINGAME;
-                }else{
-                    cr=CombatResult.WIN;
-                }    
+            applyPrize(m);
+            if(level>=MAXLEVEL){
+                cr=CombatResult.WINGAME;
+            }else{
+                cr=CombatResult.WIN;
+            }    
+        }else{
+            if(this.shouldConvert()){
+                cr=CombatResult.LOSEANDCONVERT;
             }else{
                 applyBadConsequence(m);
                 cr=CombatResult.LOSE;
             }
+        }
         return cr;
     }
     
@@ -245,7 +259,9 @@ public class Player {
         }
         return t;
     }
-    
+    protected Player getEnemy(){
+        return this.enemy;
+    }
     public void setEnemy(Player enemy){
         this.enemy=enemy;
     }

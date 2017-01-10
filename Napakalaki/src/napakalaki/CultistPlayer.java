@@ -5,6 +5,8 @@
  */
 package napakalaki;
 
+import java.util.Random;
+
 /**
  *
  * @author Charlie
@@ -12,16 +14,40 @@ package napakalaki;
 public class CultistPlayer extends Player{
     private Cultist myCultistCard;
     private static int totalCultistPlayer=0;
+    
     public CultistPlayer(Player p, Cultist c) {
         super(p.getName());
         this.myCultistCard=c;
+        totalCultistPlayer++;
     }
     
-    protected int getCombatLevel(){return 0;}
-    protected int getOponentLevel(Monster m){return 0;}
+    @Override
+    protected int getCombatLevel(){
+        double numero=super.getCombatLevel()+(super.getCombatLevel()*0.7)+(myCultistCard.getGainedLevels()*totalCultistPlayer);
+        return (int)numero;
+    }
+    
+    @Override
+    protected int getOponentLevel(Monster m){
+        return m.getCombatLevelAgainstCultistPlayer();
+    }
+    
+    @Override
     protected boolean shouldConvert(){return false;}
-    private Treasure giveMeATreasure(){return null;}
-    private boolean canYouGiveMeATreasure(){return false;}
+    
+    private Treasure giveMeATreasure(){
+        if(canYouGiveMeATreasure()){
+            Random rnd=new Random();
+            int tamano=super.getEnemy().getVisibleTreasures().size();
+            return super.getEnemy().getVisibleTreasures().get(rnd.nextInt(tamano));
+        }return null;
+    }
+    
+    private boolean canYouGiveMeATreasure(){
+        if(super.getVisibleTreasures().size()>0){
+            return true;
+        }else return false;}
+    
     public static int getTotalCultistPlayer(){return totalCultistPlayer;}
 
 

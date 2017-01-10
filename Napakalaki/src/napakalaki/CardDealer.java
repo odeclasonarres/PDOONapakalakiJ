@@ -7,6 +7,7 @@ package napakalaki;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -194,53 +195,14 @@ public class CardDealer {
     }
     
     private void shuffleTreasures(){
-        final int NUM_TESOROS=unusedTreasures.size();        
-        Random r = new Random();
-        int segunda;
-        Treasure temp;
-
-        for(int primera=0;primera<unusedTreasures.size();primera++){
-            
-            segunda=r.nextInt(NUM_TESOROS);
-            temp=unusedTreasures.get(primera);
-            unusedTreasures.set(primera, unusedTreasures.get(segunda));
-            unusedTreasures.set(segunda, temp);
-            
-            
-        }  
+        Collections.shuffle(unusedTreasures); 
     }
     
     private void shuffleMonster(){
-        final int NUM_MONSTRUOS=unusedMonsters.size();        
-        Random r = new Random();
-        int segunda;
-        Monster temp;
-
-        for(int primera=0;primera<unusedMonsters.size();primera++){
-            
-            segunda=r.nextInt(NUM_MONSTRUOS);
-            temp=unusedMonsters.get(primera);
-            unusedMonsters.set(primera, unusedMonsters.get(segunda));
-            unusedMonsters.set(segunda, temp);
-            
-            
-        }
+        Collections.shuffle(unusedMonsters);
     }
     private void shuffleCultist(){
-        final int NUM_CULTIST=unusedCultist.size();        
-        Random r = new Random();
-        int segunda;
-        Cultist temp;
-
-        for(int primera=0;primera<unusedCultist.size();primera++){
-            
-            segunda=r.nextInt(NUM_CULTIST);
-            temp=unusedCultist.get(primera);
-            unusedCultist.set(primera, unusedCultist.get(segunda));
-            unusedCultist.set(segunda, temp);
-            
-            
-        }
+        Collections.shuffle(unusedCultist);
     }
     
     public Treasure nextTreasure(){

@@ -16,13 +16,14 @@ public class Monster {
     private int combatLevel;
     private Prize prize;
     private BadConsequence bc;
-    private int levelAgainstCultistPlayer=0;
+    private int levelAgainstCultistPlayer;
 
     public Monster(String name, int combatLevel, Prize prize, BadConsequence bc) {
         this.name = name;
         this.combatLevel = combatLevel;
         this.prize = prize;
         this.bc = bc; 
+        this.levelAgainstCultistPlayer=0;
     }
     
     public Monster(String name, int combatLevel, Prize prize, BadConsequence bc, int lC) {
@@ -38,7 +39,7 @@ public class Monster {
     }
 
     public int getCombatLevelAgainstCultistPlayer(){
-        return this.levelAgainstCultistPlayer;
+        return this.levelAgainstCultistPlayer+getCombatLevel();
     }
     @Override
     public String toString() {
