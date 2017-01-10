@@ -60,7 +60,7 @@ public class Monster {
     public int getBCLevels(){
         return bc.getLevels();
     }
-    
+    /*
     public ArrayList<TreasureKind> getBCSpecificHiddenTreasures(){
         return bc.getSpecificHiddenTreasures();
     }
@@ -75,12 +75,12 @@ public class Monster {
     
     public int getBCNVisibleTreasures(){
         return bc.getnVisibleTreasures();
-    }
+    }*/
     
     public int getLevelsGained(){
         return prize.getLevel();
     }
-    
+    /*
     public boolean isBCSpecificHiddenTreasure(TreasureKind t){
         return bc.isSpecificHiddenTreasure(t);
     }
@@ -99,7 +99,7 @@ public class Monster {
     
     public boolean isBCSpecificHiddenTreasureEmpty(){
         return bc.isSpecificHiddenTreasureEmpty();
-    }
+    }*/
     
     public int getTreasuresGained(){
         return prize.getTreasure();

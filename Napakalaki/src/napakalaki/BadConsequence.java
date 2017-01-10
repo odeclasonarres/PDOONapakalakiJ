@@ -5,44 +5,22 @@
  */
 package napakalaki;
 
-import static java.lang.Integer.min;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 /**
  *
  * @author OdeclasOnarres
  */
-public class BadConsequence {
+public abstract class BadConsequence {
     private String text;
     private int levels;
-    private int nVisibleTreasures;
-    private int nHiddenTreasures;
-    private boolean death;
-    private ArrayList<TreasureKind> specificHiddenTreasures=new ArrayList();
-    private ArrayList<TreasureKind> specificVisibleTreasures=new ArrayList();
-    private static final int MAXTREASURES = 4;
+    //private boolean death;
+    protected static final int MAXTREASURES = 10;
 
-    public BadConsequence(String text, int levels, int nVisibleTreasures, int nHiddenTreasures) {
+    public BadConsequence(String text, int levels) {
         this.text = text;
         this.levels = levels;
-        this.nVisibleTreasures = nVisibleTreasures;
-        this.nHiddenTreasures = nHiddenTreasures;
-    }
-
-    public BadConsequence(String text, boolean death) {
-        this.text = text;
-        this.death = death;
-        levels = Player.MAXLEVEL;
-        nVisibleTreasures = MAXTREASURES;
-        nHiddenTreasures = MAXTREASURES;
-    }
-
-    public BadConsequence(String text, int levels, ArrayList<TreasureKind> specificVisibleTreasures, ArrayList<TreasureKind> specificHiddenTreasures) {
-        this.text = text;
-        this.levels = levels;
-        this.specificVisibleTreasures = specificVisibleTreasures;
-        this.specificHiddenTreasures = specificHiddenTreasures;
     }
 
     public String getText() {
@@ -52,134 +30,19 @@ public class BadConsequence {
     public int getLevels() {
         return levels;
     }
+    
+    abstract boolean isEmpty();
 
-    public int getnVisibleTreasures() {
-        return nVisibleTreasures;
-    }
-
-    public int getnHiddenTreasures() {
-        return nHiddenTreasures;
-    }
-
-    public boolean isDeath() {
-        return death;
-    }
-
-    public ArrayList<TreasureKind> getSpecificHiddenTreasures() {
-        return specificHiddenTreasures;
-    }
-
-    public ArrayList<TreasureKind> getSpecificVisibleTreasures() {
-        return specificVisibleTreasures;
-    }
+    abstract BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure>  h);
     
-    public boolean isSpecificVisibleTreasure(TreasureKind t){
-        for(TreasureKind t2: specificVisibleTreasures){
-            if(t2.equals(t))
-                return true;
-        }
-        return false;
-    }
+    abstract void substractVisibleTreasure(Treasure t);
     
-    public boolean isSpecificHiddenTreasure(TreasureKind t){
-        for(TreasureKind t2: specificHiddenTreasures){
-            if(t2.equals(t))
-                return true;
-        }
-        return false;
-    }
+    abstract void substractHiddenTreasure(Treasure t);
     
-    public boolean isSpecificVisibleTreasureEmpty(){
-        return specificVisibleTreasures.isEmpty();
-    }
-    
-    public boolean isSpecificHiddenTreasureEmpty(){
-        return specificHiddenTreasures.isEmpty();
-    }
-    
-    public boolean isEmpty(){
-        if(nVisibleTreasures==0&&nHiddenTreasures==0&&isSpecificVisibleTreasureEmpty()&&isSpecificHiddenTreasureEmpty())
-            return true;
-        return false;
-    }
-    
-    private ArrayList<TreasureKind> adjustSpecific(ArrayList<TreasureKind> tb, ArrayList<TreasureKind> tj){
-        ArrayList<TreasureKind> retorno = new ArrayList();
-        int x=0;
-        for(TreasureKind tipo: tb){ 
-            x=tj.indexOf(tipo);
-            if(x>=0){
-                retorno.add(tj.remove(x));  
-            }
-        }
-        return retorno;
-    }
-    
-    private ArrayList<TreasureKind> treasureToTreasureKind(ArrayList<Treasure> t){
-        ArrayList<TreasureKind> retorno = new ArrayList();
-        for(Treasure tesoro: t){
-            retorno.add(tesoro.getType());
-        }
-        return retorno;
-    }
-    
-    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure>  h){
-        BadConsequence retorno;
-        if(nVisibleTreasures!=0 || nHiddenTreasures!=0){
-            int nV,nH;
-            nV=min(nVisibleTreasures,v.size());
-            nH=min(nHiddenTreasures,h.size());
-            retorno = new BadConsequence(text, levels, nV, nH);
-        }else{
-            ArrayList<TreasureKind> sV,sH;
-            sV = adjustSpecific(specificVisibleTreasures, treasureToTreasureKind(v));
-            sH = adjustSpecific(specificHiddenTreasures, treasureToTreasureKind(h));
-            retorno = new BadConsequence(text, levels, sV, sH);
-        }   
-        return retorno;
-    }
-    
+    @Override
     public String toString(){
         String s;
-        s= text + "\nlevels = " + Integer.toString(levels) +
-                " Visible Treasures = " + Integer.toString(nVisibleTreasures) +
-                " Hidden Treasures = " + Integer.toString(nHiddenTreasures) +
-                "\nSpecific Visible Treasures = ";
-        for (TreasureKind t : specificVisibleTreasures) {
-            s += t + " ";
-        }
-        s+= " Specific Hidden Treasures = ";
-        
-        for (TreasureKind t : specificHiddenTreasures){
-            s += t + " ";
-        }
-        return s + "\nDeath = " + Boolean.toString(death)+ " )";             
-    }
-
-    public void substractVisibleTreasure(Treasure t) {
-        if(this.nVisibleTreasures>0){
-            this.nVisibleTreasures--;
-        }
-        if(!specificVisibleTreasures.isEmpty() && specificVisibleTreasures.contains(t)){
-            for(TreasureKind ty: specificVisibleTreasures){
-                if(t.getType()==ty){
-                    this.specificVisibleTreasures.remove(t.getType());
-                }
-            }
-        }
-        
-    }
-    
-    public void substractHiddenTreasure(Treasure t) {
-        if(this.nHiddenTreasures>0){
-            this.nHiddenTreasures--;
-        }
-        if(!specificHiddenTreasures.isEmpty() && specificHiddenTreasures.contains(t)){
-            for(TreasureKind ty: specificHiddenTreasures){
-                if(t.getType()==ty){
-                    this.specificHiddenTreasures.remove(t.getType());
-                }
-            }
-        }
+        s= text + "\nlevels = " + Integer.toString(levels);          
+        return s;           
     }
 }
