@@ -16,7 +16,7 @@ public class CultistPlayer extends Player{
     private static int totalCultistPlayer=0;
     
     public CultistPlayer(Player p, Cultist c) {
-        super(p.getName());
+        super(p);
         this.myCultistCard=c;
         totalCultistPlayer++;
     }
@@ -33,7 +33,12 @@ public class CultistPlayer extends Player{
     }
     
     @Override
-    protected boolean shouldConvert(){return false;}
+    protected boolean shouldConvert(){
+        Dice d = Dice.getInstance();
+        if(d.nextNumber()==6)
+            return true;
+        return false;
+    }
     
     private Treasure giveMeATreasure(){
         if(canYouGiveMeATreasure()){
