@@ -6,7 +6,7 @@
 package napakalaki;
 
 import java.util.Random;
-
+import GUI.Dice;
 /**
  *
  * @author Charlie
