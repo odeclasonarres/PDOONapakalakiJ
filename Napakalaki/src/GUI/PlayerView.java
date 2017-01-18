@@ -81,6 +81,11 @@ public class PlayerView extends javax.swing.JPanel {
         jpMonstruos = new javax.swing.JPanel();
         jpOcultos = new javax.swing.JPanel();
         jpVisibles = new javax.swing.JPanel();
+        jpBotones = new javax.swing.JPanel();
+        btRobar = new javax.swing.JButton();
+        btEquipar = new javax.swing.JButton();
+        btDescartar = new javax.swing.JButton();
+        btDescTodos = new javax.swing.JButton();
 
         jpInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
 
@@ -151,6 +156,41 @@ public class PlayerView extends javax.swing.JPanel {
         jpVisibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros visibles"));
         jpMonstruos.add(jpVisibles);
 
+        btRobar.setText("Robar");
+
+        btEquipar.setText("Equipar");
+
+        btDescartar.setText("Descartar");
+
+        btDescTodos.setText("Descartar todos");
+
+        javax.swing.GroupLayout jpBotonesLayout = new javax.swing.GroupLayout(jpBotones);
+        jpBotones.setLayout(jpBotonesLayout);
+        jpBotonesLayout.setHorizontalGroup(
+            jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBotonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btRobar)
+                    .addComponent(btDescTodos)
+                    .addComponent(btDescartar)
+                    .addComponent(btEquipar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpBotonesLayout.setVerticalGroup(
+            jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBotonesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btRobar)
+                .addGap(0, 0, 0)
+                .addComponent(btEquipar)
+                .addGap(0, 0, 0)
+                .addComponent(btDescartar)
+                .addGap(0, 0, 0)
+                .addComponent(btDescTodos)
+                .addGap(101, 101, 101))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +198,9 @@ public class PlayerView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpMonstruos, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpMonstruos, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,11 +209,19 @@ public class PlayerView extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jpInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jpMonstruos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDescTodos;
+    private javax.swing.JButton btDescartar;
+    private javax.swing.JButton btEquipar;
+    private javax.swing.JButton btRobar;
     private javax.swing.JLabel jlCombatLevel;
     private javax.swing.JLabel jlEnemigo;
     private javax.swing.JLabel jlMalRollo;
@@ -181,6 +231,7 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlRobar;
     private javax.swing.JLabel jlSectario;
+    private javax.swing.JPanel jpBotones;
     private javax.swing.JPanel jpInfo;
     private javax.swing.JPanel jpMonstruos;
     private javax.swing.JPanel jpOcultos;
