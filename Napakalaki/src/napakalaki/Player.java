@@ -39,6 +39,9 @@ public class Player {
         this.pendingBadConsequence=p.pendingBadConsequence;
     }
 
+    public BadConsequence getBadConsequence(){
+        return this.pendingBadConsequence;
+    }
     protected int  getOponentLevel(Monster m){
         return m.getCombatLevel();
     }
@@ -62,7 +65,7 @@ public class Player {
         pendingBadConsequence=null;  //no seguro
     }
 
-    protected int getCombatLevel() {
+    public int getCombatLevel() {
         int l = getLevels();
         for(Treasure v: visibleTreasures){
             l= l+ v.getBonus();
@@ -259,7 +262,7 @@ public class Player {
         }
         return t;
     }
-    protected Player getEnemy(){
+    public Player getEnemy(){
         return this.enemy;
     }
     public void setEnemy(Player enemy){
