@@ -19,7 +19,9 @@
           <Group type="102" attributes="0">
               <Component id="jpInfo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpMonstruos" min="-2" pref="463" max="-2" attributes="0"/>
+              <Component id="jpBotones" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jpMonstruos" min="-2" pref="387" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -31,6 +33,11 @@
               <Component id="jpInfo" min="-2" max="-2" attributes="0"/>
           </Group>
           <Component id="jpMonstruos" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jpBotones" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -165,6 +172,62 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
         </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jpBotones">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="btRobar" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btDescTodos" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btDescartar" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btEquipar" alignment="2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btRobar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="btEquipar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="btDescartar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="btDescTodos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btRobar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Robar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btEquipar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Equipar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btDescartar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Descartar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btDescTodos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Descartar todos"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
