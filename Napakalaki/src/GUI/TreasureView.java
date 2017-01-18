@@ -22,7 +22,7 @@ public class TreasureView extends javax.swing.JPanel {
     
     public void setTreasure(Treasure t){
         treasureModel = t;
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Treasures/"+ t.getName() + ".jpg")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Treasures/"+ treasureModel.getName() + ".jpg")));
     }
 
     /**
