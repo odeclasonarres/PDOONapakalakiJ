@@ -7,6 +7,8 @@ package GUI;
 
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import napakalaki.CultistPlayer;
+import napakalaki.Napakalaki;
 import napakalaki.Player;
 import napakalaki.Treasure;
 
@@ -16,21 +18,43 @@ import napakalaki.Treasure;
  */
 public class PlayerView extends javax.swing.JPanel {
     Player playerModel;
+    Napakalaki napakalakiModel;
     /**
      * Creates new form PlayerView
      */
     
     public void setPlayer(Player p){
         playerModel=p;    
-        jlEnemigo.setText(p.getEnemy().getName());
-        jlMalRollo.setText(p.getBadConsequence().toString());
-        jlMuerto.setText(p.isDead()+"");
-        //jlNSect.
-        jlNivel.setText(p.getLevels()+"");
-        jlCombatLevel.setText(p.getCombatLevel()+"");
-        jlNombre.setText(p.getName());
-        jlRobar.setText(p.canISteal()+"");
-        //jlSectario;
+        jEnemigoDatos.setText(p.getEnemy().getName());
+        if(p.getBadConsequence()==null)
+            jMalRolloDatos.setText("No");
+        else
+            jMalRolloDatos.setText("Si");
+        if(p.isDead())
+            jMuertoDatos.setText("Si");
+        else
+            jMuertoDatos.setText("No");
+ 
+        jNivelDatos.setText(p.getLevels()+"");
+        jCombatLevelDatos.setText(p.getCombatLevel()+"");
+        jNombreDatos.setText(p.getName());
+        if(p.canISteal())
+            jRobarDatos.setText("Si");
+        else
+            jRobarDatos.setText("No");
+        
+        jNSectDatos.setText(Integer.toString(CultistPlayer.getTotalCultistPlayer()));
+        
+        if(playerModel.getClass() == CultistPlayer.class)
+            jSectarioDatos.setText("Si");
+        else
+            jSectarioDatos.setText("No");
+        
+        if(playerModel.getBadConsequence()==null)
+            pendingBadView1.setVisiblePending(false);
+        else
+            pendingBadView1.setVisiblePending(true);
+        
         // A continuación se actualizan sus tesoros 
         fillTreasurePanel (jpVisibles, playerModel.getVisibleTreasures()); 
         fillTreasurePanel (jpOcultos, playerModel.getHiddenTreasures()); 
@@ -53,6 +77,10 @@ public class PlayerView extends javax.swing.JPanel {
         aPanel.repaint(); 
         aPanel.revalidate(); 
     }
+    
+    public void setNapakalaki(Napakalaki n){
+        napakalakiModel=n;
+    }
 
     
     public PlayerView() {
@@ -68,153 +96,130 @@ public class PlayerView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jpInfo = new javax.swing.JPanel();
         jlNombre = new javax.swing.JLabel();
+        jNombreDatos = new javax.swing.JLabel();
         jlNivel = new javax.swing.JLabel();
-        jlEnemigo = new javax.swing.JLabel();
-        jlMuerto = new javax.swing.JLabel();
-        jlRobar = new javax.swing.JLabel();
-        jlMalRollo = new javax.swing.JLabel();
-        jlSectario = new javax.swing.JLabel();
-        jlNSect = new javax.swing.JLabel();
+        jNivelDatos = new javax.swing.JLabel();
         jlCombatLevel = new javax.swing.JLabel();
-        jpMonstruos = new javax.swing.JPanel();
-        jpOcultos = new javax.swing.JPanel();
-        jpVisibles = new javax.swing.JPanel();
+        jCombatLevelDatos = new javax.swing.JLabel();
+        jlMalRollo = new javax.swing.JLabel();
+        jMalRolloDatos = new javax.swing.JLabel();
+        jlRobar = new javax.swing.JLabel();
+        jRobarDatos = new javax.swing.JLabel();
+        jlMuerto = new javax.swing.JLabel();
+        jMuertoDatos = new javax.swing.JLabel();
+        jlEnemigo = new javax.swing.JLabel();
+        jEnemigoDatos = new javax.swing.JLabel();
+        jlSectario = new javax.swing.JLabel();
+        jSectarioDatos = new javax.swing.JLabel();
+        jlNSect = new javax.swing.JLabel();
+        jNSectDatos = new javax.swing.JLabel();
         jpBotones = new javax.swing.JPanel();
         btRobar = new javax.swing.JButton();
         btEquipar = new javax.swing.JButton();
         btDescartar = new javax.swing.JButton();
         btDescTodos = new javax.swing.JButton();
+        pendingBadView1 = new GUI.PendingBadView();
+        jpTesoros = new javax.swing.JPanel();
+        jpVisibles = new javax.swing.JPanel();
+        jpOcultos = new javax.swing.JPanel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 700));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 
         jpInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
+        jpInfo.setLayout(new java.awt.GridLayout(9, 1));
 
-        jlNombre.setText("jLabel1");
+        jlNombre.setText("Nombre: ");
+        jlNombre.setPreferredSize(new java.awt.Dimension(14, 14));
+        jpInfo.add(jlNombre);
+        jpInfo.add(jNombreDatos);
 
-        jlNivel.setText("jLabel2");
+        jlNivel.setText("Nivel: ");
+        jpInfo.add(jlNivel);
+        jpInfo.add(jNivelDatos);
 
-        jlEnemigo.setText("jLabel3");
+        jlCombatLevel.setText("CombatLevel: ");
+        jpInfo.add(jlCombatLevel);
+        jpInfo.add(jCombatLevelDatos);
 
-        jlMuerto.setText("jLabel4");
+        jlMalRollo.setText("Mal rollo: ");
+        jpInfo.add(jlMalRollo);
+        jpInfo.add(jMalRolloDatos);
 
-        jlRobar.setText("jLabel5");
+        jlRobar.setText("Puedo robar: ");
+        jpInfo.add(jlRobar);
+        jpInfo.add(jRobarDatos);
 
-        jlMalRollo.setText("jLabel6");
+        jlMuerto.setText("Muerto: ");
+        jpInfo.add(jlMuerto);
+        jpInfo.add(jMuertoDatos);
 
-        jlSectario.setText("jLabel7");
+        jlEnemigo.setText("Enemigo: ");
+        jpInfo.add(jlEnemigo);
+        jpInfo.add(jEnemigoDatos);
 
-        jlNSect.setText("jLabel8");
+        jlSectario.setText("Sectario: ");
+        jpInfo.add(jlSectario);
+        jpInfo.add(jSectarioDatos);
 
-        jlCombatLevel.setText("jLabel1");
+        jlNSect.setText("Numero de sectarios: ");
+        jpInfo.add(jlNSect);
+        jpInfo.add(jNSectDatos);
 
-        javax.swing.GroupLayout jpInfoLayout = new javax.swing.GroupLayout(jpInfo);
-        jpInfo.setLayout(jpInfoLayout);
-        jpInfoLayout.setHorizontalGroup(
-            jpInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNombre)
-                    .addComponent(jlNivel)
-                    .addComponent(jlEnemigo)
-                    .addComponent(jlMuerto)
-                    .addComponent(jlRobar)
-                    .addComponent(jlMalRollo)
-                    .addComponent(jlSectario)
-                    .addComponent(jlNSect)
-                    .addComponent(jlCombatLevel))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-        jpInfoLayout.setVerticalGroup(
-            jpInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlNombre)
-                .addGap(18, 18, 18)
-                .addComponent(jlNivel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jlCombatLevel)
-                .addGap(18, 18, 18)
-                .addComponent(jlEnemigo)
-                .addGap(18, 18, 18)
-                .addComponent(jlMuerto)
-                .addGap(18, 18, 18)
-                .addComponent(jlRobar)
-                .addGap(18, 18, 18)
-                .addComponent(jlMalRollo)
-                .addGap(18, 18, 18)
-                .addComponent(jlSectario)
-                .addGap(18, 18, 18)
-                .addComponent(jlNSect))
-        );
+        jPanel1.add(jpInfo);
 
-        jpMonstruos.setLayout(new javax.swing.BoxLayout(jpMonstruos, javax.swing.BoxLayout.Y_AXIS));
-
-        jpOcultos.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros ocultos"));
-        jpMonstruos.add(jpOcultos);
-
-        jpVisibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros visibles"));
-        jpMonstruos.add(jpVisibles);
+        jpBotones.setLayout(new java.awt.GridLayout(2, 2));
 
         btRobar.setText("Robar");
+        jpBotones.add(btRobar);
 
         btEquipar.setText("Equipar");
+        btEquipar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEquiparActionPerformed(evt);
+            }
+        });
+        jpBotones.add(btEquipar);
 
         btDescartar.setText("Descartar");
+        jpBotones.add(btDescartar);
 
         btDescTodos.setText("Descartar todos");
+        jpBotones.add(btDescTodos);
 
-        javax.swing.GroupLayout jpBotonesLayout = new javax.swing.GroupLayout(jpBotones);
-        jpBotones.setLayout(jpBotonesLayout);
-        jpBotonesLayout.setHorizontalGroup(
-            jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btRobar)
-                    .addComponent(btDescTodos)
-                    .addComponent(btDescartar)
-                    .addComponent(btEquipar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpBotonesLayout.setVerticalGroup(
-            jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBotonesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btRobar)
-                .addGap(0, 0, 0)
-                .addComponent(btEquipar)
-                .addGap(0, 0, 0)
-                .addComponent(btDescartar)
-                .addGap(0, 0, 0)
-                .addComponent(btDescTodos)
-                .addGap(101, 101, 101))
-        );
+        jPanel1.add(jpBotones);
+        jPanel1.add(pendingBadView1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpMonstruos, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jpInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jpMonstruos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 515));
+
+        jpTesoros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 10));
+        jpTesoros.setLayout(new javax.swing.BoxLayout(jpTesoros, javax.swing.BoxLayout.Y_AXIS));
+
+        jpVisibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros visibles"));
+        jpVisibles.setMaximumSize(new java.awt.Dimension(816, 230));
+        jpVisibles.setMinimumSize(new java.awt.Dimension(816, 230));
+        jpVisibles.setPreferredSize(new java.awt.Dimension(700, 350));
+        jpTesoros.add(jpVisibles);
+
+        jpOcultos.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros ocultos"));
+        jpOcultos.setMaximumSize(new java.awt.Dimension(816, 230));
+        jpOcultos.setMinimumSize(new java.awt.Dimension(816, 230));
+        jpOcultos.setPreferredSize(new java.awt.Dimension(700, 350));
+        jpTesoros.add(jpOcultos);
+
+        add(jpTesoros, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 0, 800, 510));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btEquiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEquiparActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btEquiparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,6 +227,16 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JButton btDescartar;
     private javax.swing.JButton btEquipar;
     private javax.swing.JButton btRobar;
+    private javax.swing.JLabel jCombatLevelDatos;
+    private javax.swing.JLabel jEnemigoDatos;
+    private javax.swing.JLabel jMalRolloDatos;
+    private javax.swing.JLabel jMuertoDatos;
+    private javax.swing.JLabel jNSectDatos;
+    private javax.swing.JLabel jNivelDatos;
+    private javax.swing.JLabel jNombreDatos;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jRobarDatos;
+    private javax.swing.JLabel jSectarioDatos;
     private javax.swing.JLabel jlCombatLevel;
     private javax.swing.JLabel jlEnemigo;
     private javax.swing.JLabel jlMalRollo;
@@ -233,8 +248,9 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JLabel jlSectario;
     private javax.swing.JPanel jpBotones;
     private javax.swing.JPanel jpInfo;
-    private javax.swing.JPanel jpMonstruos;
     private javax.swing.JPanel jpOcultos;
+    private javax.swing.JPanel jpTesoros;
     private javax.swing.JPanel jpVisibles;
+    private GUI.PendingBadView pendingBadView1;
     // End of variables declaration//GEN-END:variables
 }

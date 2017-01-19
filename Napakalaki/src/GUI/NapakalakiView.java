@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import napakalaki.Monster;
 import napakalaki.Napakalaki;
+import napakalaki.Player;
 
 /**
  *
@@ -13,6 +15,8 @@ import napakalaki.Napakalaki;
  */
 public class NapakalakiView extends javax.swing.JFrame {
     Napakalaki napakalakiModel;
+    Player currentPlayer;
+    Monster currentMonster;
     /**
      * Creates new form NapakalakiView
      */
@@ -22,6 +26,12 @@ public class NapakalakiView extends javax.swing.JFrame {
     
     public void setNapakalaki(Napakalaki n){
         this.napakalakiModel = n;
+        currentPlayer = napakalakiModel.getCurrentPlayer();
+        currentMonster = napakalakiModel.getCurrentMonster();
+        playerView1.setPlayer(currentPlayer);
+        monsterView1.setMonstruo(currentMonster);
+        repaint();
+        revalidate();
     }
 
     /**
@@ -33,18 +43,51 @@ public class NapakalakiView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        playerView1 = new GUI.PlayerView();
+        jPanel2 = new javax.swing.JPanel();
+        monsterView1 = new GUI.MonsterView();
+        jPanel1 = new javax.swing.JPanel();
+        jCombatResult = new javax.swing.JLabel();
+        jButtonMostrarMonstruo = new javax.swing.JButton();
+        jButtonCombatir = new javax.swing.JButton();
+        jButtonNextTurn = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(playerView1, java.awt.BorderLayout.CENTER);
+
+        monsterView1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 10));
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(226, 300));
+        jPanel1.setMinimumSize(new java.awt.Dimension(226, 300));
+        jPanel1.setPreferredSize(new java.awt.Dimension(226, 300));
+        jPanel1.setLayout(new java.awt.GridLayout(4, 1));
+        jPanel1.add(jCombatResult);
+
+        jButtonMostrarMonstruo.setText("Mostrar monstruo");
+        jPanel1.add(jButtonMostrarMonstruo);
+
+        jButtonCombatir.setText("Combatir");
+        jPanel1.add(jButtonCombatir);
+
+        jButtonNextTurn.setText("Siguiente turno");
+        jPanel1.add(jButtonNextTurn);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -57,5 +100,13 @@ public class NapakalakiView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCombatir;
+    private javax.swing.JButton jButtonMostrarMonstruo;
+    private javax.swing.JButton jButtonNextTurn;
+    private javax.swing.JLabel jCombatResult;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private GUI.MonsterView monsterView1;
+    private GUI.PlayerView playerView1;
     // End of variables declaration//GEN-END:variables
 }
