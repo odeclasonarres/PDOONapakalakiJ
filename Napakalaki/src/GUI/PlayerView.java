@@ -191,6 +191,11 @@ public class PlayerView extends javax.swing.JPanel {
         jpBotones.setLayout(new java.awt.GridLayout(2, 2));
 
         btRobar.setText("Robar");
+        btRobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRobarActionPerformed(evt);
+            }
+        });
         jpBotones.add(btRobar);
 
         btEquipar.setText("Equipar");
@@ -265,13 +270,16 @@ public class PlayerView extends javax.swing.JPanel {
     }//GEN-LAST:event_btDescartarActionPerformed
 
     private void btDescTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescTodosActionPerformed
-        
         napakalakiModel.discardHiddenTreasures(napakalakiModel.getCurrentPlayer().getHiddenTreasures());
         napakalakiModel.discardVisibleTreasures(napakalakiModel.getCurrentPlayer().getVisibleTreasures());
         setPlayer(napakalakiModel.getCurrentPlayer());
         repaint();
         revalidate();
     }//GEN-LAST:event_btDescTodosActionPerformed
+
+    private void btRobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRobarActionPerformed
+        napakalakiModel.getCurrentPlayer().stealTreasure();
+    }//GEN-LAST:event_btRobarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

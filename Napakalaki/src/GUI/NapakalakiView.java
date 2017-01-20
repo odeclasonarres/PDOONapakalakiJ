@@ -15,21 +15,27 @@ import napakalaki.Player;
  */
 public class NapakalakiView extends javax.swing.JFrame {
     Napakalaki napakalakiModel;
-    Player currentPlayer;
-    Monster currentMonster;
+   // Player currentPlayer;
+    //Monster currentMonster;
     /**
      * Creates new form NapakalakiView
      */
     public NapakalakiView() {
         initComponents();
+        //playerView1=new PlayerView();
+        //monsterView1=new MonsterView();
+        jButtonNextTurn.setEnabled(false);
+        jButtonCombatir.setEnabled(false);
     }
     
     public void setNapakalaki(Napakalaki n){
         this.napakalakiModel = n;
-        currentPlayer = napakalakiModel.getCurrentPlayer();
-        currentMonster = napakalakiModel.getCurrentMonster();
-        playerView1.setPlayer(currentPlayer);
-        monsterView1.setMonstruo(currentMonster);
+        
+        //currentPlayer = napakalakiModel.getCurrentPlayer();
+        //currentMonster = napakalakiModel.getCurrentMonster();
+        playerView1.setPlayer(n.getCurrentPlayer());
+        
+        //monsterView1.setMonstruo(currentMonster);
         repaint();
         revalidate();
     }
@@ -64,12 +70,27 @@ public class NapakalakiView extends javax.swing.JFrame {
         jPanel1.add(jCombatResult);
 
         jButtonMostrarMonstruo.setText("Mostrar monstruo");
+        jButtonMostrarMonstruo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMostrarMonstruoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonMostrarMonstruo);
 
         jButtonCombatir.setText("Combatir");
+        jButtonCombatir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCombatirActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCombatir);
 
         jButtonNextTurn.setText("Siguiente turno");
+        jButtonNextTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextTurnActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonNextTurn);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -77,9 +98,9 @@ public class NapakalakiView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -94,6 +115,48 @@ public class NapakalakiView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonMostrarMonstruoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarMonstruoActionPerformed
+        monsterView1.setMonstruo(napakalakiModel.getCurrentMonster());
+        monsterView1.repaint();
+        monsterView1.revalidate();
+        jButtonMostrarMonstruo.setEnabled(false);
+        jButtonCombatir.setEnabled(true);        
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
+
+    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCombatirActionPerformed
+        jCombatResult.setText(napakalakiModel.developCombat().toString());
+        playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+        
+        playerView1.repaint();
+        playerView1.revalidate();   
+        
+        jButtonNextTurn.setEnabled(true);
+        jButtonCombatir.setEnabled(false);
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_jButtonCombatirActionPerformed
+
+    private void jButtonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextTurnActionPerformed
+        if(napakalakiModel.nextTurn()) {
+            jButtonMostrarMonstruo.setEnabled(true);
+            jButtonNextTurn.setEnabled(false);
+            playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+            playerView1.repaint();
+            playerView1.revalidate();
+            jCombatResult.setText("");
+            //monsterView1=new MonsterView();
+            //monsterView1.repaint();
+            //monsterView1.revalidate();
+        }
+        
+        jPanel1.repaint();
+        jPanel1.revalidate();
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_jButtonNextTurnActionPerformed
 
     /**
      * @param args the command line arguments
