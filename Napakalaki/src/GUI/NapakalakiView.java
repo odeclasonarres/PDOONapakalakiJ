@@ -15,22 +15,35 @@ import napakalaki.Player;
  */
 public class NapakalakiView extends javax.swing.JFrame {
     Napakalaki napakalakiModel;
-    Player currentPlayer;
-    Monster currentMonster;
+   // Player currentPlayer;
+    //Monster currentMonster;
     /**
      * Creates new form NapakalakiView
      */
     public NapakalakiView() {
         initComponents();
+        //playerView1=new PlayerView();
+        //monsterView1=new MonsterView();
+        jButtonNextTurn.setEnabled(false);
+        jButtonCombatir.setEnabled(false);
     }
     
     public void setNapakalaki(Napakalaki n){
         this.napakalakiModel = n;
-        currentPlayer = napakalakiModel.getCurrentPlayer();
-        currentMonster = napakalakiModel.getCurrentMonster();
+
+        Player currentPlayer = napakalakiModel.getCurrentPlayer();
+        Monster currentMonster = napakalakiModel.getCurrentMonster();
         playerView1.setPlayer(currentPlayer);
         playerView1.setNapakalaki(napakalakiModel);
         monsterView1.setMonstruo(currentMonster);
+
+        
+        //currentPlayer = napakalakiModel.getCurrentPlayer();
+        //currentMonster = napakalakiModel.getCurrentMonster();
+        playerView1.setPlayer(n.getCurrentPlayer());
+        
+        //monsterView1.setMonstruo(currentMonster);
+
         repaint();
         revalidate();
     }
@@ -56,7 +69,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(playerView1, java.awt.BorderLayout.CENTER);
 
-        monsterView1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 10));
+        monsterView1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setMaximumSize(new java.awt.Dimension(226, 300));
         jPanel1.setMinimumSize(new java.awt.Dimension(226, 300));
@@ -75,7 +88,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         jButtonCombatir.setText("Combatir");
         jButtonCombatir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCombatirActionPerformed(evt);
+                jButtonNextTurnActionPerformed(evt);
             }
         });
         jPanel1.add(jButtonCombatir);
@@ -92,15 +105,18 @@ public class NapakalakiView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
@@ -109,15 +125,43 @@ public class NapakalakiView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMostrarMonstruoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarMonstruoActionPerformed
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
 
-    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCombatirActionPerformed
+    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCombatirActionPerformed
+        jCombatResult.setText(napakalakiModel.developCombat().toString());
+        playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+        
+        playerView1.repaint();
+        playerView1.revalidate();   
+        
+        jButtonNextTurn.setEnabled(true);
+        jButtonCombatir.setEnabled(false);
+        repaint();
+        revalidate();
+    }                                               
+
+                                                  
 
     private void jButtonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextTurnActionPerformed
-        // TODO add your handling code here:
+        if(napakalakiModel.nextTurn()) {
+            jButtonMostrarMonstruo.setEnabled(true);
+            jButtonNextTurn.setEnabled(false);
+            playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+            playerView1.repaint();
+            playerView1.revalidate();
+            jCombatResult.setText("");
+            //monsterView1=new MonsterView();
+            //monsterView1.repaint();
+            //monsterView1.revalidate();
+        }
+        
+        jPanel1.repaint();
+        jPanel1.revalidate();
+        repaint();
+        revalidate();
     }//GEN-LAST:event_jButtonNextTurnActionPerformed
 
     /**
