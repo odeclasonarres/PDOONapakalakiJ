@@ -294,8 +294,8 @@ public class PlayerView extends javax.swing.JPanel {
     }//GEN-LAST:event_btDescartarActionPerformed
 
     private void btDescTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescTodosActionPerformed
-        napakalakiModel.discardHiddenTreasures(napakalakiModel.getCurrentPlayer().getHiddenTreasures());
-        napakalakiModel.discardVisibleTreasures(napakalakiModel.getCurrentPlayer().getVisibleTreasures());
+        napakalakiModel.discardHiddenTreasures(playerModel.getHiddenTreasures());
+        napakalakiModel.discardVisibleTreasures(playerModel.getVisibleTreasures());
         setPlayer(napakalakiModel.getCurrentPlayer());
         repaint();
         revalidate();
