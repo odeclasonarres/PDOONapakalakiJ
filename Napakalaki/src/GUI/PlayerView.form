@@ -133,6 +133,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Robar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRobarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btEquipar">
               <Properties>
@@ -146,11 +149,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descartar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDescartarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btDescTodos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descartar todos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDescTodosActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

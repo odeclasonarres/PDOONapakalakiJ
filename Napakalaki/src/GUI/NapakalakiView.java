@@ -29,6 +29,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         currentPlayer = napakalakiModel.getCurrentPlayer();
         currentMonster = napakalakiModel.getCurrentMonster();
         playerView1.setPlayer(currentPlayer);
+        playerView1.setNapakalaki(napakalakiModel);
         monsterView1.setMonstruo(currentMonster);
         repaint();
         revalidate();
@@ -64,12 +65,27 @@ public class NapakalakiView extends javax.swing.JFrame {
         jPanel1.add(jCombatResult);
 
         jButtonMostrarMonstruo.setText("Mostrar monstruo");
+        jButtonMostrarMonstruo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMostrarMonstruoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonMostrarMonstruo);
 
         jButtonCombatir.setText("Combatir");
+        jButtonCombatir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCombatirActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCombatir);
 
         jButtonNextTurn.setText("Siguiente turno");
+        jButtonNextTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextTurnActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonNextTurn);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -91,6 +107,18 @@ public class NapakalakiView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonMostrarMonstruoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarMonstruoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
+
+    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCombatirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCombatirActionPerformed
+
+    private void jButtonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextTurnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNextTurnActionPerformed
 
     /**
      * @param args the command line arguments

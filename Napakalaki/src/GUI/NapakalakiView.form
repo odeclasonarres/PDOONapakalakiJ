@@ -90,16 +90,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mostrar monstruo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMostrarMonstruoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCombatir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Combatir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCombatirActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonNextTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Siguiente turno"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNextTurnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

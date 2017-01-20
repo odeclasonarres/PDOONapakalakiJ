@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import napakalaki.CultistPlayer;
@@ -80,6 +81,20 @@ public class PlayerView extends javax.swing.JPanel {
     
     public void setNapakalaki(Napakalaki n){
         napakalakiModel=n;
+    }
+    
+    private ArrayList<Treasure> getSelectedTreasures(JPanel aPanel) {
+        // Se recorren los tesoros que contiene el panel,
+        // almacenando en un vector aquellos que están seleccionados.
+        // Finalmente se devuelve dicho vector.
+        TreasureView tv;
+        ArrayList<Treasure> output = new ArrayList();
+        for (Component c : aPanel.getComponents()) {
+            tv = (TreasureView) c;
+            if ( tv.isSelected() )
+                output.add ( tv.getTreasure() );
+        }
+        return output;
     }
 
     
@@ -177,6 +192,11 @@ public class PlayerView extends javax.swing.JPanel {
         jpBotones.setLayout(new java.awt.GridLayout(2, 2));
 
         btRobar.setText("Robar");
+        btRobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRobarActionPerformed(evt);
+            }
+        });
         jpBotones.add(btRobar);
 
         btEquipar.setText("Equipar");
@@ -188,9 +208,19 @@ public class PlayerView extends javax.swing.JPanel {
         jpBotones.add(btEquipar);
 
         btDescartar.setText("Descartar");
+        btDescartar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDescartarActionPerformed(evt);
+            }
+        });
         jpBotones.add(btDescartar);
 
         btDescTodos.setText("Descartar todos");
+        btDescTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDescTodosActionPerformed(evt);
+            }
+        });
         jpBotones.add(btDescTodos);
 
         jPanel1.add(jpBotones);
@@ -218,8 +248,22 @@ public class PlayerView extends javax.swing.JPanel {
 
     private void btEquiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEquiparActionPerformed
         // TODO add your handling code here:
-        
+        ArrayList<Treasure> selHidden = getSelectedTreasures (jpOcultos);
+        napakalakiModel.makeTreasureVisible (selHidden);
+        setPlayer (napakalakiModel.getCurrentPlayer());
     }//GEN-LAST:event_btEquiparActionPerformed
+
+    private void btRobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRobarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRobarActionPerformed
+
+    private void btDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescartarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btDescartarActionPerformed
+
+    private void btDescTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescTodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btDescTodosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
