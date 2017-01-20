@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import napakalaki.CultistPlayer;
@@ -18,7 +19,7 @@ import napakalaki.Treasure;
  */
 public class PlayerView extends javax.swing.JPanel {
     Player playerModel;
-    Napakalaki napakalakiModel;
+    Napakalaki napakalakiModel=Napakalaki.getInstance();
     /**
      * Creates new form PlayerView
      */
@@ -62,6 +63,21 @@ public class PlayerView extends javax.swing.JPanel {
         revalidate();
     }
     
+    private ArrayList<Treasure> getSelectedTreasures(JPanel aPanel){ 
+        // Se recorren los tesoros que contiene el panel, 
+        //    almacenando en un vector aquellos que están seleccionados. 
+        //    Finalmente se devuelve dicho vector. 
+        TreasureView tv; 
+        ArrayList<Treasure> output = new ArrayList(); 
+        for (Component c : aPanel.getComponents()){ 
+            tv = (TreasureView) c; 
+            if ( tv.isSelected() )   
+                output.add ( tv.getTreasure() ); 
+        } 
+        return output; 
+    }
+    
+    
     private void fillTreasurePanel(JPanel aPanel, ArrayList<Treasure> aList){ 
         // Se elimina la información antigua 
         aPanel.removeAll(); 
@@ -78,9 +94,7 @@ public class PlayerView extends javax.swing.JPanel {
         aPanel.revalidate(); 
     }
     
-    public void setNapakalaki(Napakalaki n){
-        napakalakiModel=n;
-    }
+   
 
     
     public PlayerView() {
@@ -116,23 +130,22 @@ public class PlayerView extends javax.swing.JPanel {
         jSectarioDatos = new javax.swing.JLabel();
         jlNSect = new javax.swing.JLabel();
         jNSectDatos = new javax.swing.JLabel();
+        pendingBadView1 = new GUI.PendingBadView();
         jpBotones = new javax.swing.JPanel();
         btRobar = new javax.swing.JButton();
         btEquipar = new javax.swing.JButton();
         btDescartar = new javax.swing.JButton();
         btDescTodos = new javax.swing.JButton();
-        pendingBadView1 = new GUI.PendingBadView();
         jpTesoros = new javax.swing.JPanel();
         jpVisibles = new javax.swing.JPanel();
         jpOcultos = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 700));
         jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 
-        jpInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
         jpInfo.setLayout(new java.awt.GridLayout(9, 1));
 
         jlNombre.setText("Nombre: ");
@@ -168,11 +181,12 @@ public class PlayerView extends javax.swing.JPanel {
         jpInfo.add(jlSectario);
         jpInfo.add(jSectarioDatos);
 
-        jlNSect.setText("Numero de sectarios: ");
+        jlNSect.setText("Numero sectarios: ");
         jpInfo.add(jlNSect);
         jpInfo.add(jNSectDatos);
 
         jPanel1.add(jpInfo);
+        jPanel1.add(pendingBadView1);
 
         jpBotones.setLayout(new java.awt.GridLayout(2, 2));
 
@@ -188,17 +202,25 @@ public class PlayerView extends javax.swing.JPanel {
         jpBotones.add(btEquipar);
 
         btDescartar.setText("Descartar");
+        btDescartar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDescartarActionPerformed(evt);
+            }
+        });
         jpBotones.add(btDescartar);
 
         btDescTodos.setText("Descartar todos");
+        btDescTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDescTodosActionPerformed(evt);
+            }
+        });
         jpBotones.add(btDescTodos);
 
         jPanel1.add(jpBotones);
-        jPanel1.add(pendingBadView1);
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 515));
 
-        jpTesoros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 10));
         jpTesoros.setLayout(new javax.swing.BoxLayout(jpTesoros, javax.swing.BoxLayout.Y_AXIS));
 
         jpVisibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Tesoros visibles"));
@@ -217,9 +239,39 @@ public class PlayerView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEquiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEquiparActionPerformed
-        // TODO add your handling code here:
-        
+        ArrayList<Treasure> selHidden = getSelectedTreasures (jpOcultos);
+        napakalakiModel.makeTreasureVisible(selHidden);
+        setPlayer(napakalakiModel.getCurrentPlayer());
+        repaint();
+        revalidate();
     }//GEN-LAST:event_btEquiparActionPerformed
+
+    private void btDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescartarActionPerformed
+        ArrayList<Treasure> selected = getSelectedTreasures (jpOcultos);
+        ArrayList<Treasure> selHidden=new ArrayList<>();
+        ArrayList<Treasure> selVisible=new ArrayList<>();
+        for(Treasure t:selected){
+            if(napakalakiModel.getCurrentPlayer().getVisibleTreasures().contains(t)){
+                selVisible.add(t);
+            }else{
+                selHidden.add(t);
+            }
+        }
+        napakalakiModel.discardHiddenTreasures(selHidden);
+        napakalakiModel.discardVisibleTreasures(selHidden);
+        setPlayer(napakalakiModel.getCurrentPlayer());
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_btDescartarActionPerformed
+
+    private void btDescTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescTodosActionPerformed
+        
+        napakalakiModel.discardHiddenTreasures(napakalakiModel.getCurrentPlayer().getHiddenTreasures());
+        napakalakiModel.discardVisibleTreasures(napakalakiModel.getCurrentPlayer().getVisibleTreasures());
+        setPlayer(napakalakiModel.getCurrentPlayer());
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_btDescTodosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
