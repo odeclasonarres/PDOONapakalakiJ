@@ -19,7 +19,7 @@ import napakalaki.Treasure;
  */
 public class PlayerView extends javax.swing.JPanel {
     Player playerModel;
-    Napakalaki napakalakiModel=Napakalaki.getInstance();
+    Napakalaki napakalakiModel;//=Napakalaki.getInstance();
     /**
      * Creates new form PlayerView
      */
@@ -51,16 +51,36 @@ public class PlayerView extends javax.swing.JPanel {
         else
             jSectarioDatos.setText("No");
         
-        if(playerModel.getBadConsequence()==null)
+        /*if(playerModel.getBadConsequence().isEmpty())
             pendingBadView1.setVisiblePending(false);
-        else
+        else*/
             pendingBadView1.setVisiblePending(true);
+            pendingBadView1.limpiar();
         
         // A continuación se actualizan sus tesoros 
         fillTreasurePanel (jpVisibles, playerModel.getVisibleTreasures()); 
         fillTreasurePanel (jpOcultos, playerModel.getHiddenTreasures()); 
+        btRobar.setEnabled(playerModel.canISteal());
+        manejarBotones(true);
         repaint(); 
         revalidate();
+    }
+    
+    public void setNapakalaki(Napakalaki n) {
+        napakalakiModel = n;
+    }
+    
+    public void showPendingBad(){
+        pendingBadView1.setPending(playerModel.getBadConsequence());
+        pendingBadView1.setVisiblePending(true);
+        repaint();
+        revalidate();
+    }
+    
+    public void manejarBotones(boolean accion){
+        btDescTodos.setEnabled(accion);
+        btDescartar.setEnabled(accion);
+        btEquipar.setEnabled(accion);
     }
     
     private ArrayList<Treasure> getSelectedTreasures(JPanel aPanel){ 
@@ -252,7 +272,7 @@ public class PlayerView extends javax.swing.JPanel {
     }//GEN-LAST:event_btEquiparActionPerformed
 
     private void btDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDescartarActionPerformed
-        ArrayList<Treasure> selected = getSelectedTreasures (jpOcultos);
+        /*ArrayList<Treasure> selected = getSelectedTreasures (jpOcultos);
         ArrayList<Treasure> selHidden=new ArrayList<>();
         ArrayList<Treasure> selVisible=new ArrayList<>();
         for(Treasure t:selected){
@@ -261,9 +281,13 @@ public class PlayerView extends javax.swing.JPanel {
             }else{
                 selHidden.add(t);
             }
-        }
+        }*/
+        ArrayList<Treasure> selHidden=new ArrayList();
+        ArrayList<Treasure> selVisible=new ArrayList();
+        selHidden = getSelectedTreasures (jpOcultos);
+        selVisible = getSelectedTreasures (jpVisibles);
         napakalakiModel.discardHiddenTreasures(selHidden);
-        napakalakiModel.discardVisibleTreasures(selHidden);
+        napakalakiModel.discardVisibleTreasures(selVisible);
         setPlayer(napakalakiModel.getCurrentPlayer());
         repaint();
         revalidate();
@@ -279,6 +303,9 @@ public class PlayerView extends javax.swing.JPanel {
 
     private void btRobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRobarActionPerformed
         napakalakiModel.getCurrentPlayer().stealTreasure();
+        setPlayer(napakalakiModel.getCurrentPlayer());
+        repaint();
+        revalidate();
     }//GEN-LAST:event_btRobarActionPerformed
 
 
@@ -313,4 +340,6 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JPanel jpVisibles;
     private GUI.PendingBadView pendingBadView1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

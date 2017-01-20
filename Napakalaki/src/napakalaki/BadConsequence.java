@@ -31,7 +31,7 @@ public abstract class BadConsequence {
         return levels;
     }
     
-    abstract boolean isEmpty();
+    public abstract boolean isEmpty();
 
     abstract BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure>  h);
     

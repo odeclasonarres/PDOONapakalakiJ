@@ -114,12 +114,12 @@ public class SpecificBadConsequence extends BadConsequence{
     
     @Override
     public String toString(){
-        String s = super.toString();;
-        s+= "\nSpecific Visible Treasures = ";
+        String s; //= super.toString();;
+        s= "Specific Visible Treasures = ";
         for (TreasureKind t : specificVisibleTreasures) {
             s += t + " ";
         }
-        s+= " Specific Hidden Treasures = ";
+        s+= "\nSpecific Hidden Treasures = ";
         
         for (TreasureKind t : specificHiddenTreasures){
             s += t + " ";

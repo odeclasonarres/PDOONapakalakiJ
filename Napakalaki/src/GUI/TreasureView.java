@@ -25,7 +25,7 @@ public class TreasureView extends javax.swing.JPanel {
     
     public void setTreasure(Treasure t){
         treasureModel = t;
-        System.out.println(t.getName());
+        
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Treasures/"+ treasureModel.getName() + ".jpg")));
         this.setOpaque(selected);
         repaint();

@@ -22,7 +22,7 @@ public class MonsterView extends javax.swing.JPanel {
 
     public void setMonstruo(Monster m){
         monsterView = m;
-        System.out.println(m.getName());
+        
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Monsters/" + monsterView.getName() +".jpg")));
         repaint();
         revalidate();

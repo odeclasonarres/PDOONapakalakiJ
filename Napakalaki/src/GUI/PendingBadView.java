@@ -29,6 +29,12 @@ public class PendingBadView extends javax.swing.JPanel {
     
     public void setVisiblePending(boolean visibilidad){
         this.setVisible(visibilidad);
+        repaint();
+        revalidate();
+    }
+    
+    public void limpiar(){
+        jTextArea.setText(" ");
     }
 
     /**

@@ -80,6 +80,7 @@ public class Napakalaki {
         if(retorno==CombatResult.LOSEANDCONVERT){
             Cultist carta=cd.nextCultist();
             CultistPlayer cp= new CultistPlayer(currentPlayer, carta);
+            
             for(Player p:players){
                 if(p.getEnemy()==currentPlayer)
                     p.setEnemy(cp);

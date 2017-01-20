@@ -33,10 +33,10 @@ public class Player {
         this.level=p.getLevels();
         this.dead=p.isDead();
         this.canISteal=p.canISteal();
-        this.enemy=p.enemy;
+        this.enemy=p.getEnemy();
         this.hiddenTreasures=p.getHiddenTreasures();
         this.visibleTreasures=p.getVisibleTreasures();
-        this.pendingBadConsequence=p.pendingBadConsequence;
+        this.pendingBadConsequence=p.getBadConsequence();
     }
 
     public BadConsequence getBadConsequence(){

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import napakalaki.CombatResult;
 import napakalaki.Monster;
 import napakalaki.Napakalaki;
 import napakalaki.Player;
@@ -15,8 +16,8 @@ import napakalaki.Player;
  */
 public class NapakalakiView extends javax.swing.JFrame {
     Napakalaki napakalakiModel;
-   // Player currentPlayer;
-    //Monster currentMonster;
+    Player currentPlayer;
+    Monster currentMonster;
     /**
      * Creates new form NapakalakiView
      */
@@ -24,23 +25,25 @@ public class NapakalakiView extends javax.swing.JFrame {
         initComponents();
         //playerView1=new PlayerView();
         //monsterView1=new MonsterView();
-        jButtonNextTurn.setEnabled(false);
-        jButtonCombatir.setEnabled(false);
+
+        
     }
     
     public void setNapakalaki(Napakalaki n){
         this.napakalakiModel = n;
-
-        Player currentPlayer = napakalakiModel.getCurrentPlayer();
-        Monster currentMonster = napakalakiModel.getCurrentMonster();
+        currentPlayer = napakalakiModel.getCurrentPlayer();
+        currentMonster = napakalakiModel.getCurrentMonster();
         playerView1.setPlayer(currentPlayer);
         playerView1.setNapakalaki(napakalakiModel);
         monsterView1.setMonstruo(currentMonster);
+        jButtonNextTurn.setEnabled(false);
+        jButtonCombatir.setEnabled(false);
+        monsterView1.setVisible(false);
 
         
         //currentPlayer = napakalakiModel.getCurrentPlayer();
         //currentMonster = napakalakiModel.getCurrentMonster();
-        playerView1.setPlayer(n.getCurrentPlayer());
+        //playerView1.setPlayer(n.getCurrentPlayer());
         
         //monsterView1.setMonstruo(currentMonster);
 
@@ -88,7 +91,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         jButtonCombatir.setText("Combatir");
         jButtonCombatir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextTurnActionPerformed(evt);
+                jButtonCombatirActionPerformed(evt);
             }
         });
         jPanel1.add(jButtonCombatir);
@@ -125,44 +128,68 @@ public class NapakalakiView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMostrarMonstruoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarMonstruoActionPerformed
-
+        monsterView1.setVisible(true);
+        jButtonMostrarMonstruo.setEnabled(false);
+        jButtonCombatir.setEnabled(true);
+        playerView1.manejarBotones(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
 
-    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
-        jCombatResult.setText(napakalakiModel.developCombat().toString());
-        playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
-        
-        playerView1.repaint();
-        playerView1.revalidate();   
-        
-        jButtonNextTurn.setEnabled(true);
-        jButtonCombatir.setEnabled(false);
-        repaint();
-        revalidate();
-    }                                               
-
-                                                  
-
     private void jButtonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextTurnActionPerformed
-        if(napakalakiModel.nextTurn()) {
+        // TODO add your handling code here:
+        if(napakalakiModel.nextTurn()){
+            currentMonster = napakalakiModel.getCurrentMonster();
+            currentPlayer = napakalakiModel.getCurrentPlayer();
+            playerView1.setPlayer(currentPlayer);
+            playerView1.setNapakalaki(napakalakiModel);
+            monsterView1.setMonstruo(currentMonster);
             jButtonMostrarMonstruo.setEnabled(true);
             jButtonNextTurn.setEnabled(false);
-            playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
-            playerView1.repaint();
-            playerView1.revalidate();
-            jCombatResult.setText("");
-            //monsterView1=new MonsterView();
-            //monsterView1.repaint();
-            //monsterView1.revalidate();
+            jButtonCombatir.setEnabled(false);
+            monsterView1.setVisible(false);
+            jCombatResult.setText(" ");
+            repaint();
+            revalidate();
+        }else{
+            jCombatResult.setText("No cumples el mal rollo o tienes mas \nde 4 tesoros ocultos");
+            repaint();
+            revalidate();
         }
+        //jPanel1.repaint();
+        //jPanel1.revalidate();
+
+    }//GEN-LAST:event_jButtonNextTurnActionPerformed
+
+    private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCombatirActionPerformed
+        // TODO add your handling code here:
         
-        jPanel1.repaint();
-        jPanel1.revalidate();
+        CombatResult cr = napakalakiModel.developCombat();
+        
+        if(cr == CombatResult.WINGAME){
+            jButtonNextTurn.setEnabled(false);
+            jButtonCombatir.setEnabled(false);
+            jButtonMostrarMonstruo.setEnabled(false);
+            playerView1.manejarBotones(false);
+            jCombatResult.setText("El jugador " + currentPlayer.getName() + " ha ganado la partida");
+        }else{
+            jCombatResult.setText(cr.toString());
+            if(cr == CombatResult.LOSE /*|| cr == CombatResult.LOSEANDCONVERT*/)
+                playerView1.showPendingBad();
+            //playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+            playerView1.manejarBotones(true);
+            playerView1.repaint();
+            playerView1.revalidate();   
+
+            jButtonNextTurn.setEnabled(true);
+            jButtonCombatir.setEnabled(false);
+        }
         repaint();
         revalidate();
-    }//GEN-LAST:event_jButtonNextTurnActionPerformed
+    }//GEN-LAST:event_jButtonCombatirActionPerformed
+
+                                                 
+
+                                                  
 
     /**
      * @param args the command line arguments
