@@ -93,16 +93,27 @@ public class Napakalaki {
      }
      
      public void discardVisibleTreasures(ArrayList<Treasure> treasures){
-         for(Treasure t:treasures){
-             this.currentPlayer.discardVisibleTreasure(t);
+         /*
+         He tenido que usar el otro bucle porque si no teniamos java.util.ConcurrentModificationException
+         
+         for(Treasure t:treasures){  
+            this.currentPlayer.discardVisibleTreasure(t);
              //this.cd.giveTreasureBack(t);
+         }*/
+         for(int i=treasures.size()-1;i>=0;i--){
+             this.currentPlayer.discardVisibleTreasure(treasures.get(i));
          }
      }
      
      public void discardHiddenTreasures(ArrayList<Treasure> treasures){
-         for(Treasure t:treasures){
+         /*
+         He tenido que usar el otro bucle porque si no teniamos java.util.ConcurrentModificationException
+         for(Treasure t:treasures){ 
              this.currentPlayer.discardHiddenTreasure(t);
              //this.cd.giveTreasureBack(t);
+         }*/
+         for(int i=treasures.size()-1;i>=0;i--){
+             this.currentPlayer.discardHiddenTreasure(treasures.get(i));
          }
      }
 

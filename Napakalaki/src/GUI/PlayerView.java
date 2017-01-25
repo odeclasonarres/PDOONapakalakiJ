@@ -77,10 +77,24 @@ public class PlayerView extends javax.swing.JPanel {
         revalidate();
     }
     
+    public boolean isPendingEmty(){
+        if(playerModel.getBadConsequence().isEmpty())
+            return true;
+        else
+            return false;
+    }
+    
     public void manejarBotones(boolean accion){
         btDescTodos.setEnabled(accion);
         btDescartar.setEnabled(accion);
         btEquipar.setEnabled(accion);
+    }
+    
+    public void robarActivado(boolean activar){
+        if(activar && playerModel.canISteal())
+            btRobar.setEnabled(activar);
+        else
+            btRobar.setEnabled(activar);
     }
     
     private ArrayList<Treasure> getSelectedTreasures(JPanel aPanel){ 

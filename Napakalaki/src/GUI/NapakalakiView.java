@@ -132,6 +132,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         jButtonMostrarMonstruo.setEnabled(false);
         jButtonCombatir.setEnabled(true);
         playerView1.manejarBotones(false);
+        playerView1.robarActivado(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
 
@@ -142,6 +143,7 @@ public class NapakalakiView extends javax.swing.JFrame {
             currentPlayer = napakalakiModel.getCurrentPlayer();
             playerView1.setPlayer(currentPlayer);
             playerView1.setNapakalaki(napakalakiModel);
+            playerView1.robarActivado(true);
             monsterView1.setMonstruo(currentMonster);
             jButtonMostrarMonstruo.setEnabled(true);
             jButtonNextTurn.setEnabled(false);
@@ -151,7 +153,11 @@ public class NapakalakiView extends javax.swing.JFrame {
             repaint();
             revalidate();
         }else{
-            jCombatResult.setText("No cumples el mal rollo o tienes mas \nde 4 tesoros ocultos");
+            
+            if(!playerView1.isPendingEmty())
+                jCombatResult.setText("No cumples el mal rollo");
+            else
+                jCombatResult.setText("Tienes mas de 4 tesoros ocultos");
             repaint();
             revalidate();
         }
@@ -173,16 +179,20 @@ public class NapakalakiView extends javax.swing.JFrame {
             jCombatResult.setText("El jugador " + currentPlayer.getName() + " ha ganado la partida");
         }else{
             jCombatResult.setText(cr.toString());
+            playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
             if(cr == CombatResult.LOSE /*|| cr == CombatResult.LOSEANDCONVERT*/)
                 playerView1.showPendingBad();
-            //playerView1.setPlayer(napakalakiModel.getCurrentPlayer());
+            
             playerView1.manejarBotones(true);
+            playerView1.robarActivado(true);
             playerView1.repaint();
             playerView1.revalidate();   
 
             jButtonNextTurn.setEnabled(true);
             jButtonCombatir.setEnabled(false);
         }
+        //playerView1.repaint();
+        //playerView1.revalidate(); 
         repaint();
         revalidate();
     }//GEN-LAST:event_jButtonCombatirActionPerformed

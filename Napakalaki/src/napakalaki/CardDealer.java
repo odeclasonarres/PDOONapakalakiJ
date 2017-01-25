@@ -209,7 +209,10 @@ public class CardDealer {
     public Treasure nextTreasure(){
         Treasure retorno;
         if(unusedTreasures.isEmpty()){
-            unusedTreasures=usedTreasures;
+            for(Treasure t: usedTreasures){
+                unusedTreasures.add(t);
+            }
+            //unusedTreasures=usedTreasures;
             shuffleTreasures();
             usedTreasures.clear();
             retorno=unusedTreasures.remove(0);
@@ -222,7 +225,10 @@ public class CardDealer {
     public Monster nextMonster(){
         Monster retorno;
         if(unusedMonsters.isEmpty()){
-            unusedMonsters=usedMonsters;
+            for(Monster m: usedMonsters){
+                unusedMonsters.add(m);
+            }
+            //unusedMonsters=usedMonsters;
             shuffleMonster();
             usedMonsters.clear();
             retorno=unusedMonsters.remove(0);
