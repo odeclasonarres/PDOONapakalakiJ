@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import javax.swing.JDialog;
 import napakalaki.CombatResult;
 import napakalaki.CultistPlayer;
 import napakalaki.Monster;
@@ -289,6 +290,7 @@ public class NapakalakiView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMostrarMonstruoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarMonstruoActionPerformed
+        //new JDialog(this, true).setVisible(true);
         monsterView1.setVisible(true);
         jButtonMostrarMonstruo.setEnabled(false);
         jButtonCombatir.setEnabled(true);
@@ -356,6 +358,7 @@ public class NapakalakiView extends javax.swing.JFrame {
             jButtonCombatir.setEnabled(false);
             jButtonMostrarMonstruo.setEnabled(false);
             playerView1.manejarBotones(false);
+            new JDialog(this, true).setVisible(true);
             jCombatResult.setText("El jugador " + currentPlayer.getName() + " ha ganado la partida");
         }else{
             jCombatResult.setText(cr.toString());
