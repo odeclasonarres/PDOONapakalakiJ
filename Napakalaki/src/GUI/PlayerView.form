@@ -119,25 +119,22 @@
         </Component>
         <Container class="javax.swing.JPanel" name="jpBotones">
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="2"/>
-            <Property name="rows" type="int" value="2"/>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btRobar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Robar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRobarActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btEquipar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Equipar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEquiparActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btRobar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Robar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRobarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btDescartar">

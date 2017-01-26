@@ -166,8 +166,8 @@ public class PlayerView extends javax.swing.JPanel {
         jNSectDatos = new javax.swing.JLabel();
         pendingBadView1 = new GUI.PendingBadView();
         jpBotones = new javax.swing.JPanel();
-        btRobar = new javax.swing.JButton();
         btEquipar = new javax.swing.JButton();
+        btRobar = new javax.swing.JButton();
         btDescartar = new javax.swing.JButton();
         btDescTodos = new javax.swing.JButton();
         jpTesoros = new javax.swing.JPanel();
@@ -222,7 +222,13 @@ public class PlayerView extends javax.swing.JPanel {
         jPanel1.add(jpInfo);
         jPanel1.add(pendingBadView1);
 
-        jpBotones.setLayout(new java.awt.GridLayout(2, 2));
+        btEquipar.setText("Equipar");
+        btEquipar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEquiparActionPerformed(evt);
+            }
+        });
+        jpBotones.add(btEquipar);
 
         btRobar.setText("Robar");
         btRobar.addActionListener(new java.awt.event.ActionListener() {
@@ -231,14 +237,6 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
         jpBotones.add(btRobar);
-
-        btEquipar.setText("Equipar");
-        btEquipar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEquiparActionPerformed(evt);
-            }
-        });
-        jpBotones.add(btEquipar);
 
         btDescartar.setText("Descartar");
         btDescartar.addActionListener(new java.awt.event.ActionListener() {

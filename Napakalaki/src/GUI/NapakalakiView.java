@@ -65,6 +65,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         monsterView1 = new GUI.MonsterView();
         jPanel1 = new javax.swing.JPanel();
         jCombatResult = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jButtonMostrarMonstruo = new javax.swing.JButton();
         jButtonCombatir = new javax.swing.JButton();
         jButtonNextTurn = new javax.swing.JButton();
@@ -77,8 +78,13 @@ public class NapakalakiView extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(226, 300));
         jPanel1.setMinimumSize(new java.awt.Dimension(226, 300));
         jPanel1.setPreferredSize(new java.awt.Dimension(226, 300));
-        jPanel1.setLayout(new java.awt.GridLayout(4, 1));
+        jPanel1.setLayout(new java.awt.GridLayout(2, 1));
+
+        jCombatResult.setBorder(javax.swing.BorderFactory.createTitledBorder("Combate"));
+        jCombatResult.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jPanel1.add(jCombatResult);
+
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 100, 7));
 
         jButtonMostrarMonstruo.setText("Mostrar monstruo");
         jButtonMostrarMonstruo.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +92,7 @@ public class NapakalakiView extends javax.swing.JFrame {
                 jButtonMostrarMonstruoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonMostrarMonstruo);
+        jPanel3.add(jButtonMostrarMonstruo);
 
         jButtonCombatir.setText("Combatir");
         jButtonCombatir.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +100,7 @@ public class NapakalakiView extends javax.swing.JFrame {
                 jButtonCombatirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCombatir);
+        jPanel3.add(jButtonCombatir);
 
         jButtonNextTurn.setText("Siguiente turno");
         jButtonNextTurn.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +108,9 @@ public class NapakalakiView extends javax.swing.JFrame {
                 jButtonNextTurnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonNextTurn);
+        jPanel3.add(jButtonNextTurn);
+
+        jPanel1.add(jPanel3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -215,6 +223,7 @@ public class NapakalakiView extends javax.swing.JFrame {
     private javax.swing.JLabel jCombatResult;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private GUI.MonsterView monsterView1;
     private GUI.PlayerView playerView1;
     // End of variables declaration//GEN-END:variables

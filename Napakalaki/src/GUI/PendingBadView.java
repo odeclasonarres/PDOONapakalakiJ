@@ -22,7 +22,7 @@ public class PendingBadView extends javax.swing.JPanel {
     
     public void setPending(BadConsequence b){
         pendingBad = b;
-        jTextArea.setText(pendingBad.toString());
+        jlTexto.setText(pendingBad.toString());
         repaint();
         revalidate();
     }
@@ -34,7 +34,8 @@ public class PendingBadView extends javax.swing.JPanel {
     }
     
     public void limpiar(){
-        jTextArea.setText(" ");
+        
+        jlTexto.setText(" ");
     }
 
     /**
@@ -46,21 +47,14 @@ public class PendingBadView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTexto = new javax.swing.JScrollPane();
-        jTextArea = new javax.swing.JTextArea();
+        jlTexto = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridLayout(1, 0));
-
-        jTextArea.setColumns(20);
-        jTextArea.setRows(5);
-        jTexto.setViewportView(jTextArea);
-
-        add(jTexto);
+        add(jlTexto);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea jTextArea;
-    private javax.swing.JScrollPane jTexto;
+    private javax.swing.JLabel jlTexto;
     // End of variables declaration//GEN-END:variables
 }
