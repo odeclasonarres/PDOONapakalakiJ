@@ -27,10 +27,10 @@ public class PlayerView extends javax.swing.JPanel {
     public void setPlayer(Player p){
         playerModel=p;    
         jEnemigoDatos.setText(p.getEnemy().getName());
-        if(p.getBadConsequence()==null)
+        /*if(p.getBadConsequence()==null)
             jMalRolloDatos.setText("No");
         else
-            jMalRolloDatos.setText("Si");
+            jMalRolloDatos.setText("Si");*/
         if(p.isDead())
             jMuertoDatos.setText("Si");
         else
@@ -46,9 +46,12 @@ public class PlayerView extends javax.swing.JPanel {
         
         jNSectDatos.setText(Integer.toString(CultistPlayer.getTotalCultistPlayer()));
         
-        if(playerModel.getClass() == CultistPlayer.class)
+        if(playerModel.getClass() == CultistPlayer.class){
             jSectarioDatos.setText("Si");
-        else
+            //String text=(CultistPlayer)playerModel.getMyCultist().getGainedLevels()+"";
+            //jSectarioDatos.setText(""+(CultistPlayer)playerModel.getGainedLevels());
+                    
+        }else
             jSectarioDatos.setText("No");
         
         /*if(playerModel.getBadConsequence().isEmpty())
@@ -152,8 +155,6 @@ public class PlayerView extends javax.swing.JPanel {
         jNivelDatos = new javax.swing.JLabel();
         jlCombatLevel = new javax.swing.JLabel();
         jCombatLevelDatos = new javax.swing.JLabel();
-        jlMalRollo = new javax.swing.JLabel();
-        jMalRolloDatos = new javax.swing.JLabel();
         jlRobar = new javax.swing.JLabel();
         jRobarDatos = new javax.swing.JLabel();
         jlMuerto = new javax.swing.JLabel();
@@ -162,7 +163,6 @@ public class PlayerView extends javax.swing.JPanel {
         jEnemigoDatos = new javax.swing.JLabel();
         jlSectario = new javax.swing.JLabel();
         jSectarioDatos = new javax.swing.JLabel();
-        jlNSect = new javax.swing.JLabel();
         jNSectDatos = new javax.swing.JLabel();
         pendingBadView1 = new GUI.PendingBadView();
         jpBotones = new javax.swing.JPanel();
@@ -195,10 +195,6 @@ public class PlayerView extends javax.swing.JPanel {
         jpInfo.add(jlCombatLevel);
         jpInfo.add(jCombatLevelDatos);
 
-        jlMalRollo.setText("Mal rollo: ");
-        jpInfo.add(jlMalRollo);
-        jpInfo.add(jMalRolloDatos);
-
         jlRobar.setText("Puedo robar: ");
         jpInfo.add(jlRobar);
         jpInfo.add(jRobarDatos);
@@ -214,12 +210,11 @@ public class PlayerView extends javax.swing.JPanel {
         jlSectario.setText("Sectario: ");
         jpInfo.add(jlSectario);
         jpInfo.add(jSectarioDatos);
-
-        jlNSect.setText("Numero sectarios: ");
-        jpInfo.add(jlNSect);
         jpInfo.add(jNSectDatos);
 
         jPanel1.add(jpInfo);
+
+        pendingBadView1.setBorder(javax.swing.BorderFactory.createTitledBorder("Mal rollo"));
         jPanel1.add(pendingBadView1);
 
         btEquipar.setText("Equipar");
@@ -256,7 +251,7 @@ public class PlayerView extends javax.swing.JPanel {
 
         jPanel1.add(jpBotones);
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 515));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 510));
 
         jpTesoros.setLayout(new javax.swing.BoxLayout(jpTesoros, javax.swing.BoxLayout.Y_AXIS));
 
@@ -328,7 +323,6 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JButton btRobar;
     private javax.swing.JLabel jCombatLevelDatos;
     private javax.swing.JLabel jEnemigoDatos;
-    private javax.swing.JLabel jMalRolloDatos;
     private javax.swing.JLabel jMuertoDatos;
     private javax.swing.JLabel jNSectDatos;
     private javax.swing.JLabel jNivelDatos;
@@ -338,9 +332,7 @@ public class PlayerView extends javax.swing.JPanel {
     private javax.swing.JLabel jSectarioDatos;
     private javax.swing.JLabel jlCombatLevel;
     private javax.swing.JLabel jlEnemigo;
-    private javax.swing.JLabel jlMalRollo;
     private javax.swing.JLabel jlMuerto;
-    private javax.swing.JLabel jlNSect;
     private javax.swing.JLabel jlNivel;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlRobar;

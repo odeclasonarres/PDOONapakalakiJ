@@ -6,6 +6,7 @@
 package GUI;
 
 import napakalaki.CombatResult;
+import napakalaki.CultistPlayer;
 import napakalaki.Monster;
 import napakalaki.Napakalaki;
 import napakalaki.Player;
@@ -18,6 +19,7 @@ public class NapakalakiView extends javax.swing.JFrame {
     Napakalaki napakalakiModel;
     Player currentPlayer;
     Monster currentMonster;
+    int turnos=0;
     /**
      * Creates new form NapakalakiView
      */
@@ -41,11 +43,50 @@ public class NapakalakiView extends javax.swing.JFrame {
         monsterView1.setVisible(false);
 
         
-        //currentPlayer = napakalakiModel.getCurrentPlayer();
-        //currentMonster = napakalakiModel.getCurrentMonster();
-        //playerView1.setPlayer(n.getCurrentPlayer());
+        //Pantalla de abajo
+        jlSectarios.setText(CultistPlayer.getTotalCultistPlayer()+"");
+        jlTurnos.setText(turnos%3+"");
+        jlNombre1.setText(napakalakiModel.getPlayers().get(0).getName()+"");
+        jlNombre2.setText(napakalakiModel.getPlayers().get(1).getName()+"");
+        jlNombre3.setText(napakalakiModel.getPlayers().get(2).getName()+"");        
+        jlNivel1.setText(napakalakiModel.getPlayers().get(0).getLevels()+"");   
+        jlNivel2.setText(napakalakiModel.getPlayers().get(1).getLevels()+"");   
+        jlNivel3.setText(napakalakiModel.getPlayers().get(2).getLevels()+"");   
+        jlComb1.setText(napakalakiModel.getPlayers().get(0).getCombatLevel()+"");   
+        jlComb2.setText(napakalakiModel.getPlayers().get(1).getCombatLevel()+"");   
+        jlComb3.setText(napakalakiModel.getPlayers().get(2).getCombatLevel()+""); 
+        if(napakalakiModel.getPlayers().get(0).getClass() == CultistPlayer.class){
+            jlSect1.setText("Si");                      
+        }else{
+            jlSect1.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(1).getClass() == CultistPlayer.class){
+            jlSect2.setText("Si");                      
+        }else{
+            jlSect2.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(2).getClass() == CultistPlayer.class){
+            jlSect3.setText("Si");                      
+        }else{
+            jlSect3.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(0).canISteal())
+            jlRobar1.setText("Si");
+        else
+            jlRobar1.setText("No");
+        if(napakalakiModel.getPlayers().get(1).canISteal())
+            jlRobar2.setText("Si");
+        else
+            jlRobar2.setText("No");
+        if(napakalakiModel.getPlayers().get(2).canISteal())
+            jlRobar3.setText("Si");
+        else
+            jlRobar3.setText("No");
+        jlEnimigo1.setText(napakalakiModel.getPlayers().get(0).getEnemy().getName());
+        jlEnimigo2.setText(napakalakiModel.getPlayers().get(1).getEnemy().getName());
+        jlEnimigo3.setText(napakalakiModel.getPlayers().get(2).getEnemy().getName());
+        //Fin pantalla abajo*/
         
-        //monsterView1.setMonstruo(currentMonster);
 
         repaint();
         revalidate();
@@ -69,15 +110,51 @@ public class NapakalakiView extends javax.swing.JFrame {
         jButtonMostrarMonstruo = new javax.swing.JButton();
         jButtonCombatir = new javax.swing.JButton();
         jButtonNextTurn = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jlTurnos = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jlSectarios = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jlNombre1 = new javax.swing.JLabel();
+        jlNivel1 = new javax.swing.JLabel();
+        jlComb1 = new javax.swing.JLabel();
+        jlSect1 = new javax.swing.JLabel();
+        jlRobar1 = new javax.swing.JLabel();
+        jlEnimigo1 = new javax.swing.JLabel();
+        jlNombre2 = new javax.swing.JLabel();
+        jlNivel2 = new javax.swing.JLabel();
+        jlComb2 = new javax.swing.JLabel();
+        jlSect2 = new javax.swing.JLabel();
+        jlRobar2 = new javax.swing.JLabel();
+        jlEnimigo2 = new javax.swing.JLabel();
+        jlNombre3 = new javax.swing.JLabel();
+        jlNivel3 = new javax.swing.JLabel();
+        jlComb3 = new javax.swing.JLabel();
+        jlSect3 = new javax.swing.JLabel();
+        jlRobar3 = new javax.swing.JLabel();
+        jlEnimigo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(playerView1, java.awt.BorderLayout.CENTER);
 
         monsterView1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setMaximumSize(new java.awt.Dimension(226, 300));
         jPanel1.setMinimumSize(new java.awt.Dimension(226, 300));
-        jPanel1.setPreferredSize(new java.awt.Dimension(226, 300));
+        jPanel1.setPreferredSize(new java.awt.Dimension(226, 250));
         jPanel1.setLayout(new java.awt.GridLayout(2, 1));
 
         jCombatResult.setBorder(javax.swing.BorderFactory.createTitledBorder("Combate"));
@@ -118,8 +195,8 @@ public class NapakalakiView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                    .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -127,10 +204,86 @@ public class NapakalakiView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Información general"));
+        jPanel4.setLayout(new java.awt.GridLayout(6, 6, -10, -10));
+
+        jLabel20.setText("Turnos disputados:");
+        jPanel4.add(jLabel20);
+        jPanel4.add(jlTurnos);
+        jPanel4.add(jLabel10);
+        jPanel4.add(jLabel6);
+        jPanel4.add(jLabel5);
+        jPanel4.add(jLabel4);
+
+        jLabel9.setText("Número de sectarios:");
+        jPanel4.add(jLabel9);
+        jPanel4.add(jlSectarios);
+        jPanel4.add(jLabel3);
+        jPanel4.add(jLabel2);
+        jPanel4.add(jLabel1);
+        jPanel4.add(jLabel24);
+        jPanel4.add(jLabel7);
+
+        jLabel8.setText("Nivel");
+        jPanel4.add(jLabel8);
+
+        jLabel21.setText("Niv.Combate");
+        jPanel4.add(jLabel21);
+
+        jLabel22.setText("¿Sectario?");
+        jPanel4.add(jLabel22);
+
+        jLabel23.setText("¿Puede robar?");
+        jPanel4.add(jLabel23);
+
+        jLabel12.setText("Enemigo");
+        jPanel4.add(jLabel12);
+        jPanel4.add(jlNombre1);
+        jPanel4.add(jlNivel1);
+        jPanel4.add(jlComb1);
+        jPanel4.add(jlSect1);
+        jPanel4.add(jlRobar1);
+        jPanel4.add(jlEnimigo1);
+        jPanel4.add(jlNombre2);
+        jPanel4.add(jlNivel2);
+        jPanel4.add(jlComb2);
+        jPanel4.add(jlSect2);
+        jPanel4.add(jlRobar2);
+        jPanel4.add(jlEnimigo2);
+        jPanel4.add(jlNombre3);
+        jPanel4.add(jlNivel3);
+        jPanel4.add(jlComb3);
+        jPanel4.add(jlSect3);
+        jPanel4.add(jlRobar3);
+        jPanel4.add(jlEnimigo3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(playerView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(playerView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,6 +294,21 @@ public class NapakalakiView extends javax.swing.JFrame {
         jButtonCombatir.setEnabled(true);
         playerView1.manejarBotones(false);
         playerView1.robarActivado(false);
+        jlComb1.setText(napakalakiModel.getPlayers().get(0).getCombatLevel()+"");   
+        jlComb2.setText(napakalakiModel.getPlayers().get(1).getCombatLevel()+"");   
+        jlComb3.setText(napakalakiModel.getPlayers().get(2).getCombatLevel()+""); 
+        if(napakalakiModel.getPlayers().get(0).canISteal())
+            jlRobar1.setText("Si");
+        else
+            jlRobar1.setText("No");
+        if(napakalakiModel.getPlayers().get(1).canISteal())
+            jlRobar2.setText("Si");
+        else
+            jlRobar2.setText("No");
+        if(napakalakiModel.getPlayers().get(2).canISteal())
+            jlRobar3.setText("Si");
+        else
+            jlRobar3.setText("No");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMostrarMonstruoActionPerformed
 
@@ -158,10 +326,19 @@ public class NapakalakiView extends javax.swing.JFrame {
             jButtonCombatir.setEnabled(false);
             monsterView1.setVisible(false);
             jCombatResult.setText(" ");
+            turnos++;
+            //Pantalla de abajo
+                jlTurnos.setText(turnos%3+"");        
+                jlComb1.setText(napakalakiModel.getPlayers().get(0).getCombatLevel()+"");   
+                jlComb2.setText(napakalakiModel.getPlayers().get(1).getCombatLevel()+"");   
+                jlComb3.setText(napakalakiModel.getPlayers().get(2).getCombatLevel()+""); 
+            //Fin pantalla abajo
             repaint();
             revalidate();
         }else{
-            
+            jlComb1.setText(napakalakiModel.getPlayers().get(0).getCombatLevel()+"");   
+            jlComb2.setText(napakalakiModel.getPlayers().get(1).getCombatLevel()+"");   
+            jlComb3.setText(napakalakiModel.getPlayers().get(2).getCombatLevel()+""); 
             if(!playerView1.isPendingEmty())
                 jCombatResult.setText("No cumples el mal rollo");
             else
@@ -169,16 +346,11 @@ public class NapakalakiView extends javax.swing.JFrame {
             repaint();
             revalidate();
         }
-        //jPanel1.repaint();
-        //jPanel1.revalidate();
-
     }//GEN-LAST:event_jButtonNextTurnActionPerformed
 
     private void jButtonCombatirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCombatirActionPerformed
-        // TODO add your handling code here:
-        
         CombatResult cr = napakalakiModel.developCombat();
-        
+                
         if(cr == CombatResult.WINGAME){
             jButtonNextTurn.setEnabled(false);
             jButtonCombatir.setEnabled(false);
@@ -199,8 +371,47 @@ public class NapakalakiView extends javax.swing.JFrame {
             jButtonNextTurn.setEnabled(true);
             jButtonCombatir.setEnabled(false);
         }
-        //playerView1.repaint();
-        //playerView1.revalidate(); 
+        
+        //Pantalla de abajo
+        jlSectarios.setText(CultistPlayer.getTotalCultistPlayer()+"");  
+        jlNivel1.setText(napakalakiModel.getPlayers().get(0).getLevels()+"");   
+        jlNivel2.setText(napakalakiModel.getPlayers().get(1).getLevels()+"");   
+        jlNivel3.setText(napakalakiModel.getPlayers().get(2).getLevels()+"");   
+        jlComb1.setText(napakalakiModel.getPlayers().get(0).getCombatLevel()+"");   
+        jlComb2.setText(napakalakiModel.getPlayers().get(1).getCombatLevel()+"");   
+        jlComb3.setText(napakalakiModel.getPlayers().get(2).getCombatLevel()+""); 
+        if(napakalakiModel.getPlayers().get(0).getClass() == CultistPlayer.class){
+            jlSect1.setText("Si");                      
+        }else{
+            jlSect1.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(1).getClass() == CultistPlayer.class){
+            jlSect2.setText("Si");                      
+        }else{
+            jlSect2.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(2).getClass() == CultistPlayer.class){
+            jlSect3.setText("Si");                      
+        }else{
+            jlSect3.setText("No");
+        }
+        if(napakalakiModel.getPlayers().get(0).canISteal())
+            jlRobar1.setText("Si");
+        else
+            jlRobar1.setText("No");
+        if(napakalakiModel.getPlayers().get(1).canISteal())
+            jlRobar2.setText("Si");
+        else
+            jlRobar2.setText("No");
+        if(napakalakiModel.getPlayers().get(2).canISteal())
+            jlRobar3.setText("Si");
+        else
+            jlRobar3.setText("No");
+        jlEnimigo1.setText(napakalakiModel.getPlayers().get(0).getEnemy().getName());
+        jlEnimigo2.setText(napakalakiModel.getPlayers().get(1).getEnemy().getName());
+        jlEnimigo3.setText(napakalakiModel.getPlayers().get(2).getEnemy().getName());
+        //Fin pantalla abajo*/
+        
         repaint();
         revalidate();
     }//GEN-LAST:event_jButtonCombatirActionPerformed
@@ -221,9 +432,46 @@ public class NapakalakiView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMostrarMonstruo;
     private javax.swing.JButton jButtonNextTurn;
     private javax.swing.JLabel jCombatResult;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel jlComb1;
+    private javax.swing.JLabel jlComb2;
+    private javax.swing.JLabel jlComb3;
+    private javax.swing.JLabel jlEnimigo1;
+    private javax.swing.JLabel jlEnimigo2;
+    private javax.swing.JLabel jlEnimigo3;
+    private javax.swing.JLabel jlNivel1;
+    private javax.swing.JLabel jlNivel2;
+    private javax.swing.JLabel jlNivel3;
+    private javax.swing.JLabel jlNombre1;
+    private javax.swing.JLabel jlNombre2;
+    private javax.swing.JLabel jlNombre3;
+    private javax.swing.JLabel jlRobar1;
+    private javax.swing.JLabel jlRobar2;
+    private javax.swing.JLabel jlRobar3;
+    private javax.swing.JLabel jlSect1;
+    private javax.swing.JLabel jlSect2;
+    private javax.swing.JLabel jlSect3;
+    private javax.swing.JLabel jlSectarios;
+    private javax.swing.JLabel jlTurnos;
     private GUI.MonsterView monsterView1;
     private GUI.PlayerView playerView1;
     // End of variables declaration//GEN-END:variables

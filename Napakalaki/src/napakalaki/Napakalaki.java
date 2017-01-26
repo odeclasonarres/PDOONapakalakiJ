@@ -30,6 +30,10 @@ public class Napakalaki {
          return instancia;
      }
      
+     public ArrayList<Player> getPlayers(){
+         return this.players;
+     }
+     
      private void initPlayers(ArrayList<String> names){
          for(String s: names){
              players.add(new Player(s));
